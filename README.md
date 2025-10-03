@@ -26,6 +26,7 @@ Homelabs grow messy: scattered `docker-compose.yml` files, port collisions, no s
 - [x] Repository setup with CI/CD pipeline
 - [x] Next.js monorepo structure
 - [x] TypeScript strict mode + ESLint + Prettier
+- [x] React Flow canvas with Zustand state management
 - [ ] Canvas editor with Host / Network / Service nodes
 - [ ] Import Compose v2.x → Blueprint graph
 - [ ] Export Blueprint → stable docker-compose.yml
@@ -84,6 +85,7 @@ docs/                  # Documentation
 
 - [Next.js 15](https://nextjs.org/) (App Router)
 - [React Flow](https://reactflow.dev/) (Canvas)
+- [Zustand](https://zustand.docs.pmnd.rs/) (State management)
 - [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
 
 **Backend:**
