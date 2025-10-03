@@ -65,7 +65,7 @@ jobs:
                   node-version: "20"
                   cache: "pnpm"
             - run: pnpm install --frozen-lockfile
-            - run: pnpm exec playwright install --with-deps
+            - run: pnpm --filter web exec playwright install --with-deps
             - run: pnpm run build
             - run: pnpm --filter web run test:e2e
               if: hashFiles('apps/web/e2e') != ''
