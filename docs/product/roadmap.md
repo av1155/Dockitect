@@ -42,12 +42,12 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 **Acceptance Criteria:**
 
-- [ ] All CI checks green (typecheck, lint, test, build) on main
-- [ ] `pnpm install && pnpm dev` works on fresh clone
-- [ ] Playwright can load homepage and take screenshot
-- [ ] Monorepo structure matches spec (apps/, packages/, docs/, templates/)
-- [ ] ADR 0001 documents Blueprint v0 schema with alternatives considered
-- [ ] SECURITY.md defines vulnerability reporting process (90-day disclosure)
+- [ ] All CI checks green (typecheck, lint, test, build) on main (🟦 passing on feat/p0-bootstrap, pending merge)
+- [x] `pnpm install && pnpm dev` works on fresh clone
+- [x] Playwright can load homepage and take screenshot
+- [x] Monorepo structure matches spec (apps/, packages/, docs/, templates/)
+- [x] ADR 0001 documents Blueprint v0 schema with alternatives considered
+- [ ] SECURITY.md defines vulnerability reporting process (90-day disclosure) (⬜ not started)
 
 **Risks & Rollback:**
 
@@ -163,10 +163,10 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 - Validation engine in `/packages/schema` (Zod refinements + custom linters)
 - Lint rules v0:
-  - Duplicate host ports on same host/network → error
-  - Duplicate service names → error
-  - Volume target conflicts (RW vs RO) → warning
-  - Missing env variables referenced in commands → warning
+    - Duplicate host ports on same host/network → error
+    - Duplicate service names → error
+    - Volume target conflicts (RW vs RO) → warning
+    - Missing env variables referenced in commands → warning
 - UI: Conflict panel showing errors/warnings with node highlighting
 - Auto-fix suggestions (e.g., increment port, rename service)
 - Unit tests for each lint rule with positive/negative cases
@@ -213,9 +213,9 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 - Template gallery UI: drag-and-drop service templates onto canvas
 - Template metadata: name, description, icon, default ports, required env vars
 - DX improvements:
-  - Better error messages for import failures (show line numbers, validation errors)
-  - Canvas minimap and zoom controls (React Flow built-ins)
-  - Undo/redo for canvas operations (using Zustand or React Flow state)
+    - Better error messages for import failures (show line numbers, validation errors)
+    - Canvas minimap and zoom controls (React Flow built-ins)
+    - Undo/redo for canvas operations (using Zustand or React Flow state)
 - E2E test: drag Jellyfin template → configure ports → export
 
 **Deliverables:**
@@ -414,4 +414,4 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 ---
 
-_Last updated: 2025-10-02 | Next review: End of P3 (Conflict Lint)_
+_Last updated: 2025-10-03 | Next review: End of P3 (Conflict Lint)_
