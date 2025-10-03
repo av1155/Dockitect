@@ -57,7 +57,7 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 **Dependencies:**
 
-- Tech: Node 20 LTS, pnpm 9.x, GitHub Actions runners
+- Tech: Node 20 LTS, pnpm 9.x, GitHub Actions runners, @xyflow/react, zustand
 - Sequencing: None (first phase)
 
 **Estimated Effort:** **M** (3-5 days)

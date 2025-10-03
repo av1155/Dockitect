@@ -42,6 +42,7 @@ This is a hybrid of agile + Shape Up, tuned for a solo dev and AI pair-programme
 - **TypeScript** everywhere
 - **Tailwind CSS** + **shadcn/ui** (Radix primitives)
 - **React Flow** for the diagram canvas
+- **Zustand** for canvas state management
 - **Zod** for runtime schema + forms
 - **Framer Motion** for tasteful micro-interactions (sparingly)
 
