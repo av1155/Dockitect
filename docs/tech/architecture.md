@@ -28,8 +28,8 @@ dockitect/
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript (strict mode)
 - **Styling**: Tailwind CSS + shadcn/ui (Radix primitives)
-- **Canvas**: React Flow (for visual topology editor)
-- **State**: React hooks + Context API (MVP), Zustand/Jotai (future)
+- **Canvas**: React Flow (`@xyflow/react`) for visual topology editor
+- **State**: Zustand for global canvas state management
 - **Forms**: React Hook Form + Zod validation
 
 ### Backend/Core
@@ -129,6 +129,15 @@ See [ADR 0001](../adr/0001-blueprint-schema.md) for full rationale.
 - **Atomic changes**: Update schema + importer + exporter in one PR
 - **Simplified CI**: One test suite, one build command
 - **Turborepo**: Fast incremental builds, caching across CI runs
+
+### Why Zustand for State Management?
+
+- **Minimal boilerplate**: No providers, no context wrapping
+- **TypeScript-first**: Full type inference and safety
+- **Devtools**: React DevTools integration for debugging
+- **Performance**: Selective re-renders without manual optimization
+- **Small bundle**: <1KB gzipped vs Redux/MobX
+- **Perfect for canvas**: Manages nodes, edges, and UI state in a single store
 
 ## Testing Strategy
 
