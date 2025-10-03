@@ -38,6 +38,7 @@ export default function Canvas() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={nodeTypes}
+        proOptions={{ hideAttribution: true }}
         fitView
       >
         <Background />
