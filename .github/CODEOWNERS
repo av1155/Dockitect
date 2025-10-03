@@ -1,0 +1,20 @@
+# Code Owners for Dockitect
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything
+* @av1155
+
+# Web application
+/apps/web/ @av1155
+
+# Core packages
+/packages/ @av1155
+
+# Documentation
+/docs/ @av1155
+
+# CI/CD and GitHub config
+/.github/ @av1155
+
+# Templates
+/templates/ @av1155
