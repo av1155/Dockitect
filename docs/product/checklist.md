@@ -26,7 +26,7 @@ Each task below includes:
 
 ## P0: Repository & Project Setup
 
-### P0.1: Initialize Next.js Monorepo ⬜
+### P0.1: Initialize Next.js Monorepo ✅
 
 **Files:**
 
@@ -65,16 +65,16 @@ feat(init): bootstrap Next.js monorepo with pnpm workspace
 
 - Title: `feat(init): bootstrap Next.js monorepo with pnpm workspace`
 - Description:
-  - Initialize Next.js App Router project in `/apps/web`
-  - Set up pnpm workspace with apps/ and packages/ structure
-  - Create initial directory structure for docs and templates
+    - Initialize Next.js App Router project in `/apps/web`
+    - Set up pnpm workspace with apps/ and packages/ structure
+    - Create initial directory structure for docs and templates
 - Labels: `type: feature`, `phase: p0`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `install`, `build`
 
 ---
 
-### P0.2: Configure TypeScript & ESLint ⬜
+### P0.2: Configure TypeScript & ESLint ✅
 
 **Files:**
 
@@ -185,16 +185,16 @@ chore(tooling): configure TypeScript, ESLint, Prettier
 
 - Title: `chore(tooling): configure TypeScript, ESLint, Prettier`
 - Description:
-  - Set up strict TypeScript with project references
-  - Configure ESLint with @typescript-eslint and unicorn plugins
-  - Add Prettier and EditorConfig for consistent formatting
+    - Set up strict TypeScript with project references
+    - Configure ESLint with @typescript-eslint and unicorn plugins
+    - Add Prettier and EditorConfig for consistent formatting
 - Labels: `type: chore`, `phase: p0`, `priority: high`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`
 
 ---
 
-### P0.3: Add Vitest & Playwright ⬜
+### P0.3: Add Vitest & Playwright ✅
 
 **Files:**
 
@@ -276,16 +276,16 @@ test: add Vitest and Playwright with placeholder tests
 
 - Title: `test: add Vitest and Playwright with placeholder tests`
 - Description:
-  - Configure Vitest for unit testing with coverage
-  - Set up Playwright for e2e testing
-  - Add placeholder tests to verify setup
+    - Configure Vitest for unit testing with coverage
+    - Set up Playwright for e2e testing
+    - Add placeholder tests to verify setup
 - Labels: `type: test`, `phase: p0`, `priority: high`
 - Reviewers: @maintainer
 - CI Checks: `test`, `e2e`
 
 ---
 
-### P0.4: GitHub Actions CI Workflow ⬜
+### P0.4: GitHub Actions CI Workflow ✅
 
 **Files:**
 
@@ -408,16 +408,16 @@ ci: add GitHub Actions workflows for CI and CodeQL
 
 - Title: `ci: add GitHub Actions workflows for CI and CodeQL`
 - Description:
-  - Add CI workflow: typecheck, lint, test, build, e2e
-  - Configure CodeQL security scanning (weekly + PR)
-  - Enable Renovate for automated dependency updates
+    - Add CI workflow: typecheck, lint, test, build, e2e
+    - Configure CodeQL security scanning (weekly + PR)
+    - Enable Renovate for automated dependency updates
 - Labels: `type: ci`, `phase: p0`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `build-test`, `analyze`
 
 ---
 
-### P0.5: Repository Hygiene Files ⬜
+### P0.5: Repository Hygiene Files ✅
 
 **Files:**
 
@@ -659,17 +659,17 @@ docs: add repository hygiene files (LICENSE, SECURITY, templates)
 
 - Title: `docs: add repository hygiene files (LICENSE, SECURITY, templates)`
 - Description:
-  - Add MIT LICENSE
-  - Create SECURITY.md with 90-day disclosure policy
-  - Add CODEOWNERS, PR template, issue templates
-  - Enable structured issue reporting
+    - Add MIT LICENSE
+    - Create SECURITY.md with 90-day disclosure policy
+    - Add CODEOWNERS, PR template, issue templates
+    - Enable structured issue reporting
 - Labels: `type: docs`, `phase: p0`, `priority: high`
 - Reviewers: @maintainer
 - CI Checks: `build` (validate templates parse)
 
 ---
 
-### P0.6: Create CONTRIBUTING.md & CODE_OF_CONDUCT.md ⬜
+### P0.6: Create CONTRIBUTING.md & CODE_OF_CONDUCT.md ✅
 
 **Files:**
 
@@ -884,7 +884,7 @@ docs: add CONTRIBUTING and CODE_OF_CONDUCT guides
 
 ---
 
-### P0.7: Architecture & ADR Documentation ⬜
+### P0.7: Architecture & ADR Documentation ✅
 
 **Files:**
 - `/docs/tech/architecture.md`
@@ -1159,17 +1159,17 @@ feat(ui): initialize React Flow canvas with Zustand state
 
 - Title: `feat(ui): initialize React Flow canvas with Zustand state`
 - Description:
-  - Add React Flow for canvas rendering
-  - Set up Zustand for global canvas state
-  - Create placeholder canvas component on homepage
-  - E2E test verifies canvas mounts
+    - Add React Flow for canvas rendering
+    - Set up Zustand for global canvas state
+    - Create placeholder canvas component on homepage
+    - E2E test verifies canvas mounts
 - Labels: `type: feature`, `phase: p0`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
 
 ---
 
-### P0.9: Create Initial README ⬜
+### P0.9: Create Initial README ✅
 
 **Files:**
 
@@ -1388,10 +1388,10 @@ feat(schema): define Blueprint v0 with Zod validation
 
 - Title: `feat(schema): define Blueprint v0 with Zod validation`
 - Description:
-  - Implement Blueprint v0 schema with Host, Network, Service types
-  - Add Zod validation with strict typing
-  - Export JSON Schema for API documentation
-  - 90% test coverage with valid/invalid fixtures
+    - Implement Blueprint v0 schema with Host, Network, Service types
+    - Add Zod validation with strict typing
+    - Export JSON Schema for API documentation
+    - 90% test coverage with valid/invalid fixtures
 - Labels: `type: feature`, `phase: p1`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`
@@ -1439,10 +1439,10 @@ feat(importer): implement Compose v2.x to Blueprint parser
 
 - Title: `feat(importer): implement Compose v2.x to Blueprint parser`
 - Description:
-  - Parse docker-compose.yml (v2.x) into Blueprint v0
-  - Handle services, networks, volumes, ports, env vars
-  - 5 test fixtures covering common patterns
-  - Error handling for invalid/unsupported features
+    - Parse docker-compose.yml (v2.x) into Blueprint v0
+    - Handle services, networks, volumes, ports, env vars
+    - 5 test fixtures covering common patterns
+    - Error handling for invalid/unsupported features
 - Labels: `type: feature`, `phase: p1`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`
@@ -1484,10 +1484,10 @@ feat(ui): add file upload component for compose import
 
 - Title: `feat(ui): add file upload component for compose import`
 - Description:
-  - File input with .yml/.yaml filter
-  - API route calls importer package
-  - Display success/error feedback
-  - E2E test verifies upload flow
+    - File input with .yml/.yaml filter
+    - API route calls importer package
+    - Display success/error feedback
+    - E2E test verifies upload flow
 - Labels: `type: feature`, `phase: p1`, `priority: high`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -1529,10 +1529,10 @@ feat(canvas): render Service and Network nodes from Blueprint
 
 - Title: `feat(canvas): render Service and Network nodes from Blueprint`
 - Description:
-  - Convert Blueprint to React Flow node/edge format
-  - ServiceNode component displays name, image, ports
-  - NetworkNode shows network name and driver
-  - E2E test: upload → verify nodes rendered
+    - Convert Blueprint to React Flow node/edge format
+    - ServiceNode component displays name, image, ports
+    - NetworkNode shows network name and driver
+    - E2E test: upload → verify nodes rendered
 - Labels: `type: feature`, `phase: p1`, `priority: critical`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -1573,9 +1573,9 @@ feat(canvas): render edges connecting services to networks
 
 - Title: `feat(canvas): render edges connecting services to networks`
 - Description:
-  - Generate React Flow edges from service.networks
-  - Visual connections between ServiceNode and NetworkNode
-  - E2E test validates edge rendering
+    - Generate React Flow edges from service.networks
+    - Visual connections between ServiceNode and NetworkNode
+    - E2E test validates edge rendering
 - Labels: `type: feature`, `phase: p1`, `priority: high`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -1618,9 +1618,9 @@ test(importer): add 6 compose fixtures for parser validation
 
 - Title: `test(importer): add 6 compose fixtures for parser validation`
 - Description:
-  - Add realistic docker-compose.yml fixtures
-  - Cover: simple service, multi-service, networks, volumes, ports
-  - Include Jellyfin template for e2e testing
+    - Add realistic docker-compose.yml fixtures
+    - Cover: simple service, multi-service, networks, volumes, ports
+    - Include Jellyfin template for e2e testing
 - Labels: `type: test`, `phase: p1`, `priority: medium`
 - Reviewers: @maintainer
 - CI Checks: `test`
@@ -1661,9 +1661,9 @@ docs: add demo GIF for import flow (upload → canvas)
 
 - Title: `docs: add demo GIF for import flow (upload → canvas)`
 - Description:
-  - Record import workflow: upload compose → canvas renders
-  - Embed in README for visual appeal
-  - GIF <2MB, optimized for web
+    - Record import workflow: upload compose → canvas renders
+    - Embed in README for visual appeal
+    - GIF <2MB, optimized for web
 - Labels: `type: docs`, `phase: p1`, `priority: low`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -1712,10 +1712,10 @@ feat(exporter): implement deterministic Blueprint to Compose generator
 
 - Title: `feat(exporter): implement deterministic Blueprint to Compose generator`
 - Description:
-  - Generate docker-compose.yml from Blueprint v0
-  - Stable alphabetical key ordering (services, networks, volumes)
-  - Use fast-json-stable-stringify for object stability
-  - Snapshot tests ensure determinism
+    - Generate docker-compose.yml from Blueprint v0
+    - Stable alphabetical key ordering (services, networks, volumes)
+    - Use fast-json-stable-stringify for object stability
+    - Snapshot tests ensure determinism
 - Labels: `type: feature`, `phase: p2`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`
@@ -1756,9 +1756,9 @@ feat(ui): add export button to download compose from canvas
 
 - Title: `feat(ui): add export button to download compose from canvas`
 - Description:
-  - Export button triggers API route
-  - Download docker-compose.yml with correct MIME type
-  - E2E test verifies file download
+    - Export button triggers API route
+    - Download docker-compose.yml with correct MIME type
+    - E2E test verifies file download
 - Labels: `type: feature`, `phase: p2`, `priority: high`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -1797,9 +1797,9 @@ test(importer): add round-trip tests (import → export → import)
 
 - Title: `test(importer): add round-trip tests (import → export → import)`
 - Description:
-  - Validate import/export parity with round-trip tests
-  - Assert semantic equivalence of Blueprints
-  - Cover all importer fixtures
+    - Validate import/export parity with round-trip tests
+    - Assert semantic equivalence of Blueprints
+    - Cover all importer fixtures
 - Labels: `type: test`, `phase: p2`, `priority: high`
 - Reviewers: @maintainer
 - CI Checks: `test`
@@ -1854,9 +1854,9 @@ ci: add Docker compose validation script
 
 - Title: `ci: add Docker compose validation script`
 - Description:
-  - Script validates exported compose with `docker compose config`
-  - Integrated into CI workflow
-  - Skips if Docker not available
+    - Script validates exported compose with `docker compose config`
+    - Integrated into CI workflow
+    - Skips if Docker not available
 - Labels: `type: ci`, `phase: p2`, `priority: medium`
 - Reviewers: @maintainer
 - CI Checks: `build-test`, `validate-compose`
@@ -1943,9 +1943,9 @@ docs(adr): add ADR-0003 on export determinism strategy
 
 - Title: `docs(adr): add ADR-0003 on export determinism strategy`
 - Description:
-  - Document approach for stable YAML exports
-  - Explain alphabetical sorting and array preservation
-  - List alternatives considered
+    - Document approach for stable YAML exports
+    - Explain alphabetical sorting and array preservation
+    - List alternatives considered
 - Labels: `type: docs`, `phase: p2`, `priority: medium`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -1984,9 +1984,9 @@ docs: add demo GIF for export flow (draw → export)
 
 - Title: `docs: add demo GIF for export flow (draw → export)`
 - Description:
-  - Record export workflow: canvas → export button → download
-  - Embed in README
-  - GIF <2MB, optimized
+    - Record export workflow: canvas → export button → download
+    - Embed in README
+    - GIF <2MB, optimized
 - Labels: `type: docs`, `phase: p2`, `priority: low`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -2029,12 +2029,12 @@ feat(schema): add conflict validation rules (ports, names, volumes, env)
 
 - Title: `feat(schema): add conflict validation rules (ports, names, volumes, env)`
 - Description:
-  - Zod refinements for 4 lint rules
-  - Duplicate port detection (same host/network)
-  - Duplicate service name detection
-  - Volume target conflict detection (RW vs RO)
-  - Missing env var detection
-  - 90% test coverage
+    - Zod refinements for 4 lint rules
+    - Duplicate port detection (same host/network)
+    - Duplicate service name detection
+    - Volume target conflict detection (RW vs RO)
+    - Missing env var detection
+    - 90% test coverage
 - Labels: `type: feature`, `phase: p3`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`
@@ -2075,10 +2075,10 @@ feat(ui): add conflict panel to display validation errors/warnings
 
 - Title: `feat(ui): add conflict panel to display validation errors/warnings`
 - Description:
-  - Sidebar panel lists all conflicts with severity (error/warning)
-  - Click conflict → highlight affected node on canvas
-  - Debounced validation (500ms) on canvas changes
-  - E2E test verifies panel functionality
+    - Sidebar panel lists all conflicts with severity (error/warning)
+    - Click conflict → highlight affected node on canvas
+    - Debounced validation (500ms) on canvas changes
+    - E2E test verifies panel functionality
 - Labels: `type: feature`, `phase: p3`, `priority: high`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2118,10 +2118,10 @@ feat(ui): add visual badges to canvas nodes for conflicts
 
 - Title: `feat(ui): add visual badges to canvas nodes for conflicts`
 - Description:
-  - Red badge for errors, yellow for warnings
-  - Badge shows conflict count
-  - Hover shows tooltip with conflict details
-  - E2E test validates badge rendering
+    - Red badge for errors, yellow for warnings
+    - Badge shows conflict count
+    - Hover shows tooltip with conflict details
+    - E2E test validates badge rendering
 - Labels: `type: feature`, `phase: p3`, `priority: medium`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2163,10 +2163,10 @@ feat(schema): add auto-fix for port collisions and duplicate names
 
 - Title: `feat(schema): add auto-fix for port collisions and duplicate names`
 - Description:
-  - Auto-increment duplicate ports (8080 → 8081)
-  - Auto-rename duplicate services (app → app-2)
-  - "Fix" button in conflict panel applies suggestions
-  - E2E test: fix conflict → export valid compose
+    - Auto-increment duplicate ports (8080 → 8081)
+    - Auto-rename duplicate services (app → app-2)
+    - "Fix" button in conflict panel applies suggestions
+    - E2E test: fix conflict → export valid compose
 - Labels: `type: feature`, `phase: p3`, `priority: high`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2205,9 +2205,9 @@ test: add fixtures for conflict detection (ports, names, volumes)
 
 - Title: `test: add fixtures for conflict detection (ports, names, volumes)`
 - Description:
-  - Fixtures with intentional conflicts for testing
-  - Cover port collisions, duplicate names, volume RW/RO conflicts
-  - Used in validation and auto-fix tests
+    - Fixtures with intentional conflicts for testing
+    - Cover port collisions, duplicate names, volume RW/RO conflicts
+    - Used in validation and auto-fix tests
 - Labels: `type: test`, `phase: p3`, `priority: medium`
 - Reviewers: @maintainer
 - CI Checks: `test`
@@ -2245,9 +2245,9 @@ docs: add demo GIF for conflict detection and auto-fix
 
 - Title: `docs: add demo GIF for conflict detection and auto-fix`
 - Description:
-  - Record conflict workflow: upload → detect → fix
-  - Embed in README
-  - GIF <2MB
+    - Record conflict workflow: upload → detect → fix
+    - Embed in README
+    - GIF <2MB
 - Labels: `type: docs`, `phase: p3`, `priority: low`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -2293,10 +2293,10 @@ feat(templates): add 5 appliance templates (Jellyfin, Uptime-Kuma, Immich, Nextc
 
 - Title: `feat(templates): add 5 appliance templates (Jellyfin, Uptime-Kuma, Immich, Nextcloud, Paperless-ngx)`
 - Description:
-  - Pre-configured service templates with default ports, volumes, env
-  - Validated against Blueprint schema
-  - Includes metadata: name, description, icon
-  - CI test ensures templates remain valid
+    - Pre-configured service templates with default ports, volumes, env
+    - Validated against Blueprint schema
+    - Includes metadata: name, description, icon
+    - CI test ensures templates remain valid
 - Labels: `type: feature`, `phase: p4`, `priority: high`
 - Reviewers: @maintainer
 - CI Checks: `test`
@@ -2336,10 +2336,10 @@ feat(ui): add template gallery sidebar with drag-and-drop
 
 - Title: `feat(ui): add template gallery sidebar with drag-and-drop`
 - Description:
-  - Sidebar panel lists appliance templates
-  - Drag template onto canvas creates pre-configured service
-  - Cards show icon, name, description
-  - E2E test validates drag-and-drop flow
+    - Sidebar panel lists appliance templates
+    - Drag template onto canvas creates pre-configured service
+    - Cards show icon, name, description
+    - E2E test validates drag-and-drop flow
 - Labels: `type: feature`, `phase: p4`, `priority: high`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2377,10 +2377,10 @@ feat(canvas): add minimap and zoom controls
 
 - Title: `feat(canvas): add minimap and zoom controls`
 - Description:
-  - Enable React Flow minimap for navigation
-  - Add zoom in/out/fit controls
-  - Improve canvas UX for large graphs
-  - E2E test verifies controls render
+    - Enable React Flow minimap for navigation
+    - Add zoom in/out/fit controls
+    - Improve canvas UX for large graphs
+    - E2E test verifies controls render
 - Labels: `type: feature`, `phase: p4`, `priority: medium`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2420,10 +2420,10 @@ feat(canvas): add undo/redo with Ctrl+Z/Ctrl+Y support
 
 - Title: `feat(canvas): add undo/redo with Ctrl+Z/Ctrl+Y support`
 - Description:
-  - Undo/redo buttons in toolbar
-  - Keyboard shortcuts: Ctrl+Z (undo), Ctrl+Y (redo)
-  - Maintains 50-step history
-  - E2E test validates undo/redo flow
+    - Undo/redo buttons in toolbar
+    - Keyboard shortcuts: Ctrl+Z (undo), Ctrl+Y (redo)
+    - Maintains 50-step history
+    - E2E test validates undo/redo flow
 - Labels: `type: feature`, `phase: p4`, `priority: medium`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2463,10 +2463,10 @@ feat(importer): improve error messages with line numbers and context
 
 - Title: `feat(importer): improve error messages with line numbers and context`
 - Description:
-  - Parse errors show YAML line numbers
-  - Validation errors highlight problematic fields
-  - User-friendly error messages (not raw stack traces)
-  - E2E test verifies error display
+    - Parse errors show YAML line numbers
+    - Validation errors highlight problematic fields
+    - User-friendly error messages (not raw stack traces)
+    - E2E test verifies error display
 - Labels: `type: feature`, `phase: p4`, `priority: medium`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2504,9 +2504,9 @@ docs: add demo GIF for template usage
 
 - Title: `docs: add demo GIF for template usage`
 - Description:
-  - Record template workflow: drag → customize → export
-  - Embed in README
-  - GIF <2MB
+    - Record template workflow: drag → customize → export
+    - Embed in README
+    - GIF <2MB
 - Labels: `type: docs`, `phase: p4`, `priority: low`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -2583,10 +2583,10 @@ feat(db): set up Prisma with SQLite for blueprint persistence
 
 - Title: `feat(db): set up Prisma with SQLite for blueprint persistence`
 - Description:
-  - Add Prisma with SQLite datasource
-  - Define Project and Blueprint models
-  - Initial migration
-  - Prisma client setup
+    - Add Prisma with SQLite datasource
+    - Define Project and Blueprint models
+    - Initial migration
+    - Prisma client setup
 - Labels: `type: feature`, `phase: p5`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `build`
@@ -2627,12 +2627,12 @@ feat(api): add CRUD endpoints for project management
 
 - Title: `feat(api): add CRUD endpoints for project management`
 - Description:
-  - POST /api/projects (create)
-  - GET /api/projects (list)
-  - GET /api/projects/:id (read)
-  - PATCH /api/projects/:id (update)
-  - DELETE /api/projects/:id (delete)
-  - Repository pattern for DB access
+    - POST /api/projects (create)
+    - GET /api/projects (list)
+    - GET /api/projects/:id (read)
+    - PATCH /api/projects/:id (update)
+    - DELETE /api/projects/:id (delete)
+    - Repository pattern for DB access
 - Labels: `type: feature`, `phase: p5`, `priority: high`, `area: api`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `build`
@@ -2673,10 +2673,10 @@ feat(ui): add save/load buttons and project switcher
 
 - Title: `feat(ui): add save/load buttons and project switcher`
 - Description:
-  - Save button persists current blueprint to DB
-  - Projects list page shows all saved blueprints
-  - Project switcher in toolbar
-  - E2E test validates save/load flow
+    - Save button persists current blueprint to DB
+    - Projects list page shows all saved blueprints
+    - Project switcher in toolbar
+    - E2E test validates save/load flow
 - Labels: `type: feature`, `phase: p5`, `priority: high`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2715,10 +2715,10 @@ feat(ui): add auto-save with 2s debounce and indicator
 
 - Title: `feat(ui): add auto-save with 2s debounce and indicator`
 - Description:
-  - Auto-save triggers 2s after last canvas change
-  - Indicator shows "saving..." / "saved" / "error"
-  - Debounced to avoid excessive DB writes
-  - E2E test verifies auto-save behavior
+    - Auto-save triggers 2s after last canvas change
+    - Indicator shows "saving..." / "saved" / "error"
+    - Debounced to avoid excessive DB writes
+    - E2E test verifies auto-save behavior
 - Labels: `type: feature`, `phase: p5`, `priority: medium`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2758,11 +2758,11 @@ feat(ui): add settings panel with theme and export preferences
 
 - Title: `feat(ui): add settings panel with theme and export preferences`
 - Description:
-  - Theme toggle (light/dark)
-  - Export format preferences (indent size, comments)
-  - Telemetry opt-in (default off)
-  - Settings persist in localStorage
-  - E2E test verifies settings panel
+    - Theme toggle (light/dark)
+    - Export format preferences (indent size, comments)
+    - Telemetry opt-in (default off)
+    - Settings persist in localStorage
+    - E2E test verifies settings panel
 - Labels: `type: feature`, `phase: p5`, `priority: medium`, `area: ui`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
@@ -2859,9 +2859,9 @@ docs(adr): add ADR-0002 on persistence strategy (Prisma + SQLite)
 
 - Title: `docs(adr): add ADR-0002 on persistence strategy (Prisma + SQLite)`
 - Description:
-  - Document decision to use Prisma with SQLite
-  - Explain schema, storage, and access patterns
-  - List alternatives considered
+    - Document decision to use Prisma with SQLite
+    - Explain schema, storage, and access patterns
+    - List alternatives considered
 - Labels: `type: docs`, `phase: p5`, `priority: medium`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -2907,10 +2907,10 @@ docs: set up Docusaurus site for documentation
 
 - Title: `docs: set up Docusaurus site for documentation`
 - Description:
-  - Initialize Docusaurus with classic theme
-  - Migrate existing docs to /docs structure
-  - Configure navigation and sidebar
-  - Deploy preview on PR
+    - Initialize Docusaurus with classic theme
+    - Migrate existing docs to /docs structure
+    - Configure navigation and sidebar
+    - Deploy preview on PR
 - Labels: `type: docs`, `phase: p6`, `priority: high`
 - Reviewers: @maintainer
 - CI Checks: `build` (docs build)
@@ -2950,9 +2950,9 @@ docs: add Getting Started guide (installation, quickstart, first blueprint)
 
 - Title: `docs: add Getting Started guide (installation, quickstart, first blueprint)`
 - Description:
-  - Installation guide: Docker, pnpm, requirements
-  - Quickstart: run app, upload compose, export
-  - First blueprint tutorial: step-by-step canvas usage
+    - Installation guide: Docker, pnpm, requirements
+    - Quickstart: run app, upload compose, export
+    - First blueprint tutorial: step-by-step canvas usage
 - Labels: `type: docs`, `phase: p6`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -2991,9 +2991,9 @@ docs: add API reference and Blueprint JSON Schema
 
 - Title: `docs: add API reference and Blueprint JSON Schema`
 - Description:
-  - Document all API endpoints (projects, blueprints)
-  - Include request/response examples
-  - Export Blueprint JSON Schema for reference
+    - Document all API endpoints (projects, blueprints)
+    - Include request/response examples
+    - Export Blueprint JSON Schema for reference
 - Labels: `type: docs`, `phase: p6`, `priority: high`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -3035,9 +3035,9 @@ docs: add video demo walkthrough (2min)
 
 - Title: `docs: add video demo walkthrough (2min)`
 - Description:
-  - Full workflow demonstration
-  - Voiceover explaining features
-  - Embed in README and docs site
+    - Full workflow demonstration
+    - Voiceover explaining features
+    - Embed in README and docs site
 - Labels: `type: docs`, `phase: p6`, `priority: medium`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -3077,10 +3077,10 @@ docs: polish README with screenshots and architecture diagram
 
 - Title: `docs: polish README with screenshots and architecture diagram`
 - Description:
-  - Add 3+ screenshots showing key features
-  - Include C4 architecture diagram
-  - Update badges (CI, version, license)
-  - Improve quickstart section
+    - Add 3+ screenshots showing key features
+    - Include C4 architecture diagram
+    - Update badges (CI, version, license)
+    - Improve quickstart section
 - Labels: `type: docs`, `phase: p6`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -3122,9 +3122,9 @@ chore(security): audit dependencies and CodeQL scan
 
 - Title: `chore(security): audit dependencies and CodeQL scan`
 - Description:
-  - Review and resolve CodeQL alerts
-  - Update vulnerable dependencies
-  - Document security posture in SECURITY.md
+    - Review and resolve CodeQL alerts
+    - Update vulnerable dependencies
+    - Document security posture in SECURITY.md
 - Labels: `type: chore`, `phase: p6`, `priority: high`, `area: security`
 - Reviewers: @maintainer
 - CI Checks: `codeql`, `build-test`
@@ -3172,9 +3172,9 @@ chore: add MIT license headers to all source files
 
 - Title: `chore: add MIT license headers to all source files`
 - Description:
-  - Prepend copyright notice to all TS/TSX files
-  - Ensure license compliance
-  - Automated via script
+    - Prepend copyright notice to all TS/TSX files
+    - Ensure license compliance
+    - Automated via script
 - Labels: `type: chore`, `phase: p6`, `priority: low`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -3295,10 +3295,10 @@ ci: add multi-arch Docker build workflow (amd64, arm64)
 
 - Title: `ci: add multi-arch Docker build workflow (amd64, arm64)`
 - Description:
-  - GitHub Actions workflow for Docker builds on tags
-  - Multi-stage Dockerfile with Next.js standalone
-  - Push to GHCR with version tags
-  - Layer caching for faster builds
+    - GitHub Actions workflow for Docker builds on tags
+    - Multi-stage Dockerfile with Next.js standalone
+    - Push to GHCR with version tags
+    - Layer caching for faster builds
 - Labels: `type: ci`, `phase: p7`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `docker` (on tag push)
@@ -3390,10 +3390,10 @@ ci: configure semantic-release for automated versioning
 
 - Title: `ci: configure semantic-release for automated versioning`
 - Description:
-  - Auto-generate CHANGELOG from commits
-  - Create GitHub releases with notes
-  - Bump version in package.json
-  - Tag releases (vX.Y.Z)
+    - Auto-generate CHANGELOG from commits
+    - Create GitHub releases with notes
+    - Bump version in package.json
+    - Tag releases (vX.Y.Z)
 - Labels: `type: ci`, `phase: p7`, `priority: high`
 - Reviewers: @maintainer
 - CI Checks: `release`
@@ -3452,9 +3452,9 @@ chore: add GitHub release notes template
 
 - Title: `chore: add GitHub release notes template`
 - Description:
-  - Categorize release notes by type (features, fixes, docs, etc.)
-  - Improve changelog readability
-  - Exclude skip-changelog labeled PRs
+    - Categorize release notes by type (features, fixes, docs, etc.)
+    - Improve changelog readability
+    - Exclude skip-changelog labeled PRs
 - Labels: `type: chore`, `phase: p7`, `priority: low`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -3604,9 +3604,9 @@ chore: enable GitHub Discussions and update issue templates
 
 - Title: `chore: enable GitHub Discussions and update issue templates`
 - Description:
-  - Enable Discussions for Q&A, feature requests, show & tell
-  - Update README with Discussions link
-  - Create welcome post
+    - Enable Discussions for Q&A, feature requests, show & tell
+    - Update README with Discussions link
+    - Create welcome post
 - Labels: `type: chore`, `phase: p7`, `priority: medium`
 - Reviewers: @maintainer
 - CI Checks: `build`
@@ -3669,9 +3669,9 @@ docs: add post-launch support and triage plan
 
 - Title: `docs: add post-launch support and triage plan`
 - Description:
-  - Define SLAs for issue responses
-  - Document triage process and weekly review
-  - Emergency hotfix procedure
+    - Define SLAs for issue responses
+    - Document triage process and weekly review
+    - Emergency hotfix procedure
 - Labels: `type: docs`, `phase: p7`, `priority: low`
 - Reviewers: @maintainer
 - CI Checks: `build`

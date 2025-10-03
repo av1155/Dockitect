@@ -1,0 +1,60 @@
+name: Bug Report
+description: Report a bug in Dockitect
+labels: ["type: bug", "status: triage"]
+body:
+    - type: markdown
+      attributes:
+          value: Thanks for taking the time to report a bug!
+
+    - type: textarea
+      id: description
+      attributes:
+          label: Description
+          description: Clear description of the bug
+      validations:
+          required: true
+
+    - type: textarea
+      id: reproduce
+      attributes:
+          label: Steps to Reproduce
+          placeholder: |
+              1. Go to '...'
+              2. Click on '...'
+              3. See error
+      validations:
+          required: true
+
+    - type: textarea
+      id: expected
+      attributes:
+          label: Expected Behavior
+      validations:
+          required: true
+
+    - type: textarea
+      id: actual
+      attributes:
+          label: Actual Behavior
+      validations:
+          required: true
+
+    - type: input
+      id: version
+      attributes:
+          label: Dockitect Version
+          placeholder: v1.0.0
+      validations:
+          required: true
+
+    - type: input
+      id: browser
+      attributes:
+          label: Browser/Environment
+          placeholder: Chrome 120, Docker 24.x
+
+    - type: textarea
+      id: additional
+      attributes:
+          label: Additional Context
+          description: Add any other context, screenshots, or logs

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+    - name: Discussions (Q&A, Ideas)
+      url: https://github.com/av1155/Dockitect/discussions
+      about: For questions and general discussion
+    - name: Documentation
+      url: https://github.com/av1155/Dockitect#readme
+      about: Check the docs first
