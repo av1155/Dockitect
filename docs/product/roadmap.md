@@ -42,12 +42,13 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 **Acceptance Criteria:**
 
-- [ ] All CI checks green (typecheck, lint, test, build) on main (🟦 passing on feat/p0-bootstrap, pending merge)
+- [x] All CI checks green (typecheck, lint, test, build) on main
 - [x] `pnpm install && pnpm dev` works on fresh clone
 - [x] Playwright can load homepage and take screenshot
 - [x] Monorepo structure matches spec (apps/, packages/, docs/, templates/)
 - [x] ADR 0001 documents Blueprint v0 schema with alternatives considered
 - [x] SECURITY.md defines vulnerability reporting process (90-day disclosure)
+- [x] React Flow canvas initialized with Zustand state management
 
 **Risks & Rollback:**
 
@@ -60,6 +61,16 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 - Sequencing: None (first phase)
 
 **Estimated Effort:** **M** (3-5 days)
+
+**Status:** ✅ **COMPLETE** (Merged to main on 2025-10-03)
+
+**Deliverables Summary:**
+- ✅ Monorepo setup with Next.js 15, TypeScript, Tailwind CSS, shadcn/ui
+- ✅ Full CI/CD pipeline (typecheck, lint, test, e2e, build, CodeQL)
+- ✅ Repository hygiene (LICENSE, CONTRIBUTING, SECURITY, CODEOWNERS)
+- ✅ Architecture docs (ADR 0001, architecture.md, mvp.md)
+- ✅ React Flow canvas with Zustand state management
+- ✅ All vision alignment verified (Blueprint v0, templates, core principles)
 
 ---
 

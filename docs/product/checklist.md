@@ -1123,7 +1123,7 @@ docs(adr): add architecture docs and ADR-0001 (Blueprint schema)
 
 ---
 
-### P0.8: Initialize React Flow Canvas ⬜
+### P0.8: Initialize React Flow Canvas ✅
 
 **Files:**
 - `/apps/web/app/page.tsx` (home page with canvas)
