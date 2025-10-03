@@ -417,7 +417,7 @@ ci: add GitHub Actions workflows for CI and CodeQL
 
 ---
 
-### P0.5: Repository Hygiene Files ⬜
+### P0.5: Repository Hygiene Files ✅
 
 **Files:**
 
@@ -669,7 +669,7 @@ docs: add repository hygiene files (LICENSE, SECURITY, templates)
 
 ---
 
-### P0.6: Create CONTRIBUTING.md & CODE_OF_CONDUCT.md ⬜
+### P0.6: Create CONTRIBUTING.md & CODE_OF_CONDUCT.md ✅
 
 **Files:**
 
@@ -1169,7 +1169,7 @@ feat(ui): initialize React Flow canvas with Zustand state
 
 ---
 
-### P0.9: Create Initial README ⬜
+### P0.9: Create Initial README ✅
 
 **Files:**
 
