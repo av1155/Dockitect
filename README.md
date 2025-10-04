@@ -124,11 +124,18 @@ We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 ## 🗺️ Roadmap
 
-Current phase: **P0 - Repository & Project Setup** ✅
+Current phase: **P1 - MVP Importer (Compose v2.x → Blueprint)** 🚧 (50% complete)
+
+Completed:
+
+- ✅ **P0**: Repository & Project Setup
+- ✅ **P1.1**: Blueprint v0 Schema
+- ✅ **P1.2**: Compose v2.x Parser
 
 Next up:
 
-- **P1**: MVP Importer (Compose v2.x → Blueprint)
+- **P1.3**: File Upload UI Component
+- **P1.4**: Canvas Rendering of Imported Services
 - **P2**: MVP Exporter (Blueprint → Compose v2.x)
 - **P3**: Conflict Lint & Validation
 
