@@ -91,6 +91,79 @@ dockitect/
 - **No backend required**: MVP runs entirely in browser + local filesystem (Next.js API routes for persistence)
 - **Multi-platform**: Runs on amd64 and arm64 (Raspberry Pi, NAS, x86 servers)
 
+## Blueprint Schema
+
+The Blueprint v0 schema is the core data model powering Dockitect's import, export, and canvas rendering.
+
+**Package**: `@dockitect/schema`
+
+**Location**: `/packages/schema/src/blueprint.ts`
+
+### Core Entities
+
+- **Blueprint**: Root type containing version, metadata, hosts, networks, and services
+- **Host**: Physical/virtual machine (e.g., NAS, Pi, VM)
+- **Network**: Docker network with optional driver and subnet configuration
+- **Service**: Containerized service with image, ports, volumes, environment, etc.
+
+### Validation
+
+All Blueprint instances are validated using Zod schemas with:
+
+- Runtime type checking
+- UUID validation for entity IDs
+- Port range validation (1-65535)
+- Datetime validation for timestamps
+- Enum validation for restart policies and protocols
+
+### JSON Schema Export
+
+The package exports a JSON Schema representation via `getBlueprintJsonSchema()` for API documentation and external tooling.
+
+### Example Blueprint
+
+```typescript
+const blueprint: Blueprint = {
+  version: "v0",
+  meta: {
+    id: "123e4567-e89b-12d3-a456-426614174000",
+    name: "Jellyfin Stack",
+    createdAt: "2025-01-01T00:00:00Z",
+    updatedAt: "2025-01-01T00:00:00Z",
+  },
+  hosts: [
+    {
+      id: "223e4567-e89b-12d3-a456-426614174001",
+      name: "nas",
+      notes: "Primary storage server",
+    },
+  ],
+  networks: [
+    {
+      id: "323e4567-e89b-12d3-a456-426614174002",
+      name: "media",
+      driver: "bridge",
+    },
+  ],
+  services: [
+    {
+      id: "423e4567-e89b-12d3-a456-426614174003",
+      name: "jellyfin",
+      image: "jellyfin/jellyfin:latest",
+      ports: [{ host: 8096, container: 8096, protocol: "tcp" }],
+      volumes: [
+        { type: "bind", source: "/mnt/media", target: "/media", readOnly: true },
+      ],
+      networks: ["323e4567-e89b-12d3-a456-426614174002"],
+      restart: "unless-stopped",
+      hostId: "223e4567-e89b-12d3-a456-426614174001",
+    },
+  ],
+};
+```
+
+See [ADR 0001](../adr/0001-blueprint-schema.md) for design rationale.
+
 ## Data Flow
 
 ```mermaid

@@ -141,6 +141,82 @@ Schema migrations will be versioned and tested with round-trip import/export fix
 3. **Test fixtures**: Include 5+ Blueprint examples in `/packages/schema/__fixtures__/`
 4. **Round-trip tests**: Compose → Blueprint → Compose (semantic equivalence)
 
+## Implementation Status
+
+✅ **Completed** (P1.1 - 2025-01-04)
+
+The Blueprint v0 schema has been implemented in `/packages/schema` with the following:
+
+### Package Structure
+
+```
+packages/schema/
+├── src/
+│   ├── blueprint.ts       # Core Zod schemas
+│   ├── json-schema.ts     # JSON Schema export helper
+│   └── index.ts           # Public API exports
+├── __tests__/
+│   └── blueprint.test.ts  # Comprehensive test suite (34 tests)
+├── package.json
+├── tsconfig.json
+├── vitest.config.ts
+└── eslint.config.js
+```
+
+### Validation Features
+
+- **Port validation**: Integer range 1-65535, protocol defaults to "tcp"
+- **Volume validation**: Type enforcement (bind/volume), read-only defaults to false
+- **UUID validation**: All entity IDs validated as UUIDs
+- **Datetime validation**: ISO 8601 timestamps for createdAt/updatedAt
+- **Enum validation**: Restart policies (no/always/unless-stopped/on-failure)
+- **Non-empty strings**: Names and paths must have length ≥ 1
+
+### Test Coverage
+
+- 34 test cases covering all schema types
+- Validation of valid inputs
+- Rejection of invalid inputs with clear error messages
+- Edge cases (empty strings, invalid UUIDs, out-of-range ports)
+- Default value behavior (protocol, readOnly)
+- Complex nested structures (multi-service with dependencies)
+
+### Exports
+
+```typescript
+// Core schemas
+export {
+  BlueprintSchema,
+  PortSchema,
+  VolumeSchema,
+  HostSchema,
+  NetSchema,
+  ServiceSchema,
+  BlueprintMetaSchema,
+};
+
+// TypeScript types (inferred from Zod)
+export type {
+  Blueprint,
+  Port,
+  Volume,
+  Host,
+  Net,
+  Service,
+  BlueprintMeta,
+};
+
+// JSON Schema helper
+export { getBlueprintJsonSchema };
+```
+
+### Dependencies
+
+- `zod@^3.22.4` - Runtime validation
+- `zod-to-json-schema@^3.24.6` - JSON Schema export
+
+All tests pass ✅ | TypeScript validation passes ✅
+
 ## References
 
 - [Docker Compose Specification v2.x](https://docs.docker.com/compose/compose-file/)
