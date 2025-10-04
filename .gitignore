@@ -40,3 +40,5 @@ Thumbs.db
 *.tsbuildinfo
 .turbo/
 latest_chat.md
+latest_chat.txt
+last_message.txt

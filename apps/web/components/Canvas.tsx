@@ -30,7 +30,7 @@ export default function Canvas() {
   );
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-full min-h-0">
       <ReactFlow
         nodes={nodes}
         edges={edges}
