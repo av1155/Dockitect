@@ -39,7 +39,8 @@ Thumbs.db
 # Misc
 *.tsbuildinfo
 .turbo/
-latest_chat.md
-latest_chat.txt
-last_message.txt
+
+# Agents
+last_chat.md
+last_chat.txt
 next_session.md
