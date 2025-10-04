@@ -7,7 +7,19 @@ import {
   type Port,
   type Volume,
 } from "@dockitect/schema";
-import { randomUUID } from "crypto";
+// Cross-platform UUID generator (Node + Browser)
+function generateUUID(): string {
+  const g: any = (typeof globalThis !== "undefined" ? globalThis : {}) as any;
+  if (g.crypto && typeof g.crypto.randomUUID === "function") {
+    return g.crypto.randomUUID();
+  }
+  // Fallback for environments without crypto.randomUUID
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
 
 interface ComposeService {
   image?: string;
@@ -49,7 +61,7 @@ export function importDockerCompose(composeYaml: string): Blueprint {
   const networks: Net[] = [];
   if (compose.networks) {
     for (const [name, config] of Object.entries(compose.networks)) {
-      const id = randomUUID();
+      const id = generateUUID();
       networkMap.set(name, id);
 
       const subnet = config?.ipam?.config?.[0]?.subnet;
@@ -65,7 +77,7 @@ export function importDockerCompose(composeYaml: string): Blueprint {
 
   const services: Service[] = [];
   for (const [name, config] of Object.entries(compose.services)) {
-    const id = randomUUID();
+    const id = generateUUID();
     serviceMap.set(name, id);
 
     if (!config.image) {
@@ -131,7 +143,7 @@ export function importDockerCompose(composeYaml: string): Blueprint {
   const blueprint: Blueprint = {
     version: "v0",
     meta: {
-      id: randomUUID(),
+      id: generateUUID(),
       name: "Imported Stack",
       createdAt: now,
       updatedAt: now,

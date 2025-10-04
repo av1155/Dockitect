@@ -20,6 +20,12 @@ importers:
 
   apps/web:
     dependencies:
+      '@dockitect/importer':
+        specifier: workspace:^
+        version: link:../../packages/importer
+      '@dockitect/schema':
+        specifier: workspace:^
+        version: link:../../packages/schema
       '@xyflow/react':
         specifier: ^12.8.6
         version: 12.8.6(@types/react@19.2.0)(react-dom@19.1.0)(react@19.1.0)

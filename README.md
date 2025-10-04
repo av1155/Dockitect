@@ -30,7 +30,7 @@ Homelabs grow messy: scattered `docker-compose.yml` files, port collisions, no s
 - [x] Blueprint v0 schema with Zod validation (34 tests)
 - [x] Compose v2.x parser → Blueprint (23 tests, 6 fixtures)
 - [ ] Canvas editor with Host / Network / Service nodes
-- [ ] File upload UI for Compose import
+- [x] File upload UI for Compose import (4 E2E tests)
 - [ ] Export Blueprint → stable docker-compose.yml
 - [ ] Port/volume/name conflict detection
 - [ ] 5+ appliance templates (drag-and-drop)
