@@ -178,6 +178,39 @@ graph LR
     H -.Round-trip test.-> A
 ```
 
+### Importer Data Flow (P1.2 - Implemented)
+
+The importer package (`@dockitect/importer`) transforms docker-compose.yml files into validated Blueprint v0 structures:
+
+1. **YAML Parsing**: Uses `yaml` package to parse Compose v2.x files
+2. **Entity Extraction**:
+   - Services → Blueprint services with UUIDs
+   - Networks → Blueprint networks with driver/subnet config
+   - Volumes → Classified as bind mounts or named volumes
+3. **Relationship Mapping**:
+   - Service dependencies via `depends_on`
+   - Network connections via service.networks
+   - Volume mounts with read-only flags
+4. **Port & Environment Parsing**:
+   - Port mappings: `"8080:80/tcp"` → `{host: 8080, container: 80, protocol: "tcp"}`
+   - Environment variables: Array or object format → normalized object
+5. **UUID Generation**: All entities assigned UUIDs for internal references
+6. **Zod Validation**: Final Blueprint validated against schema before return
+
+**Supported Features**:
+- Services (image, command, env, ports, volumes, networks, depends_on, restart, labels)
+- Networks (name, driver, subnet CIDR via IPAM)
+- Volumes (bind mounts with `:ro` flag, named volumes)
+- Ports (TCP/UDP protocol support)
+- Dependencies (service startup order)
+
+**Error Handling**:
+- Invalid YAML syntax
+- Missing required fields (service image)
+- Undefined network/service references
+- Invalid port formats
+- Schema validation failures
+
 ## Key Design Decisions
 
 ### Why Not Use docker-compose.yml Directly?
