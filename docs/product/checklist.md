@@ -1351,13 +1351,16 @@ docs: create initial README with quickstart and roadmap
 
 ## P1: MVP Importer (Compose v2.x → Blueprint)
 
-### P1.1: Define Blueprint v0 Schema (Zod) ⬜
+### P1.1: Define Blueprint v0 Schema (Zod) ✅
+
+**Status:** COMPLETE (2025-01-04)
 
 **Files:**
-- `/packages/schema/package.json`
-- `/packages/schema/src/index.ts`
-- `/packages/schema/src/blueprint.ts`
-- `/packages/schema/src/__tests__/blueprint.test.ts`
+- ✅ `/packages/schema/package.json`
+- ✅ `/packages/schema/src/index.ts`
+- ✅ `/packages/schema/src/blueprint.ts`
+- ✅ `/packages/schema/src/json-schema.ts`
+- ✅ `/packages/schema/__tests__/blueprint.test.ts`
 
 **Commands:**
 ```bash
@@ -1365,33 +1368,42 @@ cd packages/schema
 pnpm init
 pnpm add zod zod-to-json-schema
 pnpm add -D typescript vitest
-````
+```
 
 **Tests:**
-
-- Unit tests: validate valid/invalid Blueprint instances
-- Test: export JSON Schema from Zod
-- Coverage: ≥90%
+- ✅ 34 unit tests covering all schema types
+- ✅ JSON Schema export helper implemented
+- ✅ Coverage exceeds 90% target
 
 **Docs:**
-
-- Update architecture.md with Blueprint schema details
-- Update ADR-0001 with final schema
+- ✅ Updated architecture.md with Blueprint schema section
+- ✅ Updated ADR-0001 with implementation details
 
 **Commit:**
+```
+feat(schema): implement Blueprint v0 with Zod validation
 
+- Implement Blueprint v0 schema per ADR-0001 spec
+- Add Host, Network, Service, Port, Volume entity types
+- Include runtime validation with strict type checking
+- Add JSON Schema export via zod-to-json-schema
+- Create comprehensive test suite with 34 test cases
+- Update architecture.md with Blueprint schema section
+- Document implementation in ADR-0001
+
+All tests pass, TypeScript validation passes
 ```
-feat(schema): define Blueprint v0 with Zod validation
-```
+
+**Branch:** `feat/p1.1-blueprint-schema`
+**Commit:** `2cdecf2`
 
 **PR:**
-
-- Title: `feat(schema): define Blueprint v0 with Zod validation`
+- Title: `feat(schema): implement Blueprint v0 with Zod validation`
 - Description:
-    - Implement Blueprint v0 schema with Host, Network, Service types
-    - Add Zod validation with strict typing
-    - Export JSON Schema for API documentation
-    - 90% test coverage with valid/invalid fixtures
+    - ✅ Implement Blueprint v0 schema with Host, Network, Service types
+    - ✅ Add Zod validation with strict typing
+    - ✅ Export JSON Schema for API documentation
+    - ✅ 90% test coverage with valid/invalid fixtures (34 tests)
 - Labels: `type: feature`, `phase: p1`, `priority: critical`
 - Reviewers: @maintainer
 - CI Checks: `typecheck`, `lint`, `test`
