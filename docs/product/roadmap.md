@@ -98,11 +98,12 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 **Acceptance Criteria:**
 
-- [ ] Importer handles 5+ test fixtures without errors
-- [ ] Blueprint v0 schema validates all parsed outputs
-- [ ] Canvas renders ≥3 service nodes from multi-service compose
-- [ ] Network edges connect services correctly
-- [ ] E2E test uploads jellyfin.yml and asserts 1 service node visible
+- [x] **P1.1:** Blueprint v0 schema implemented and validates all entity types
+- [ ] **P1.2:** Importer handles 5+ test fixtures without errors
+- [ ] **P1.3:** File upload UI component integrated
+- [ ] **P1.4:** Canvas renders ≥3 service nodes from multi-service compose
+- [ ] **P1.5:** Network edges connect services correctly
+- [ ] **P1.6:** E2E test uploads jellyfin.yml and asserts 1 service node visible
 - [ ] Code coverage ≥80% for importer package
 
 **Risks & Rollback:**
@@ -117,6 +118,8 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 - Sequencing: Requires P0 (repo structure)
 
 **Estimated Effort:** **L** (5-7 days)
+
+**Status:** 🟦 **IN PROGRESS** (P1.1 complete, P1.2 next)
 
 ---
 
