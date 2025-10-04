@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  app:
+    image: myapp:latest
+    volumes:
+      - ./config:/app/config:ro
+      - /var/log/app:/var/log:ro
+      - app-data:/data
+      - cache:/tmp/cache
+
+volumes:
+  app-data:
+  cache:

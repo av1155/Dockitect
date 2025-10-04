@@ -27,8 +27,10 @@ Homelabs grow messy: scattered `docker-compose.yml` files, port collisions, no s
 - [x] Next.js monorepo structure
 - [x] TypeScript strict mode + ESLint + Prettier
 - [x] React Flow canvas with Zustand state management
+- [x] Blueprint v0 schema with Zod validation (34 tests)
+- [x] Compose v2.x parser → Blueprint (23 tests, 6 fixtures)
 - [ ] Canvas editor with Host / Network / Service nodes
-- [ ] Import Compose v2.x → Blueprint graph
+- [ ] File upload UI for Compose import
 - [ ] Export Blueprint → stable docker-compose.yml
 - [ ] Port/volume/name conflict detection
 - [ ] 5+ appliance templates (drag-and-drop)
