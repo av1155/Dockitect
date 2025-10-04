@@ -29,3 +29,9 @@
 - **Deterministic exports:** Stable YAML key ordering (alphabetical), use `fast-json-stable-stringify`
 - **Security:** No Docker socket access; file-based import/export only; no telemetry by default
 - **Node:** ≥18.0.0, pnpm ≥8.0.0 required
+
+## Git Workflow
+- **Branch Protection:** Never push directly to `main` unless strictly necessary
+- **Pull Requests:** All changes must come from PRs with passing tests
+- **Branch Naming:** Use `feat/`, `fix/`, `chore/`, `docs/` prefixes (e.g., `feat/p1.3-file-upload-ui`)
+- **Commits:** Follow Conventional Commits format
