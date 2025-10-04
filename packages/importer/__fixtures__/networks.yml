@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  web:
+    image: nginx:alpine
+    networks:
+      - frontend
+    ports:
+      - "80:80"
+
+  api:
+    image: node:20-alpine
+    networks:
+      - frontend
+      - backend
+
+  db:
+    image: postgres:15-alpine
+    networks:
+      - backend
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
