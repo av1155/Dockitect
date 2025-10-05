@@ -211,6 +211,36 @@ The importer package (`@dockitect/importer`) transforms docker-compose.yml files
 - Invalid port formats
 - Schema validation failures
 
+### Canvas Rendering (P1.4 - Implemented)
+
+- Location: `apps/web/lib/blueprintToNodes.ts`
+- Converter: `blueprintToNodes(blueprint)` returns `{ nodes, edges }` consumed by React Flow
+- Auto-layout algorithm:
+  - Services laid out on a grid
+    - `spacing = 200`
+    - `cols = ceil(sqrt(serviceCount))`, `rows = ceil(serviceCount / cols)`
+    - Position per service: `{ x: col * spacing, y: row * spacing }`
+  - Networks laid out in a single horizontal row below services
+    - `networkY = max(rows * spacing + 150, 300)`
+    - Position per network: `{ x: index * spacing, y: networkY }`
+- Edges:
+  - For each `service.networks[]`, create an edge: `service-${service.id}` → `network-${netId}`
+
+Components:
+- `ServiceNode` (`apps/web/components/nodes/ServiceNode.tsx`)
+  - Renders service name, image, and ports count
+  - Accessibility: `role="group"`, ARIA labels, top/bottom handles
+  - Design token: blue border (`border-blue-600`, dark: `border-blue-500`)
+- `NetworkNode` (`apps/web/components/nodes/NetworkNode.tsx`)
+  - Renders network name and driver (defaults to `bridge`)
+  - Accessibility: `role="group"`, ARIA labels, top/bottom handles
+  - Design token: success border color (`var(--success)`) for network semantics
+
+Notes on design tokens:
+- Services use the blue-600 token to convey primary interactive entities
+- Networks use the success token to differentiate infrastructure links
+- Tokens align with the project style guide in `context/style-guide.md`
+
 ## Key Design Decisions
 
 ### Why Not Use docker-compose.yml Directly?

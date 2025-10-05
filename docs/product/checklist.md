@@ -1508,7 +1508,16 @@ feat(importer): implement Compose v2.x to Blueprint parser
  
 ---
 
-### P1.4: Render Service Nodes on Canvas ⬜
+### P1.4: Render Service Nodes on Canvas ✅
+
+**Status:** COMPLETE (2025-10-04)
+
+**Deliverables Summary (P1.4):**
+- ✅ ServiceNode and NetworkNode components implemented
+- ✅ blueprintToNodes converter with auto-layout (grid for services; networks in horizontal row)
+- ✅ Design tokens applied: blue-600 for services; success for networks
+- ✅ 4 new E2E tests added (apps/web/e2e/canvas-render.spec.ts)
+- ✅ All tests passing: 58 unit + 11 E2E
 
 **Files:**
 
@@ -1528,10 +1537,11 @@ cd apps/web
 
 - Unit: blueprintToNodes converts Blueprint to React Flow node format
 - E2E: upload jellyfin.yml → verify 1 service node rendered with correct label
+- E2E: multi-service → ≥3 services rendered; networks rendered when present; no nodes before upload
 
 **Docs:**
 
-- Update architecture.md with canvas rendering details
+- Update architecture.md with canvas rendering details (converter logic, components, auto-layout, tokens)
 
 **Commit:**
 

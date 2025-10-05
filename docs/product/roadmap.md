@@ -101,7 +101,7 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 - [x] **P1.1:** Blueprint v0 schema implemented and validates all entity types
 - [x] **P1.2:** Importer handles 6 test fixtures without errors
 - [x] **P1.3:** File upload UI component integrated
-- [ ] **P1.4:** Canvas renders ≥3 service nodes from multi-service compose
+- [x] **P1.4:** Canvas renders ≥3 service nodes from multi-service compose
 - [ ] **P1.5:** Network edges connect services correctly
 - [ ] **P1.6:** E2E test uploads jellyfin.yml and asserts 1 service node visible
 - [x] Code coverage ≥80% for importer package (23 tests passing)
@@ -119,17 +119,15 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 **Estimated Effort:** **L** (5-7 days)
 
-**Status:** 🟦 **IN PROGRESS** (P1.1-P1.3 complete, P1.4 next)
+**Status:** 🟦 **IN PROGRESS** (P1.1-P1.4 complete; P1.5 and P1.6 next)
 
-**Deliverables Summary (P1.3):**
-- ✅ FileUpload component with WCAG 2.2 AA compliance
-- ✅ Blueprint state management in Zustand store
-- ✅ Accessible upload button with file validation (≤2MB, .yml/.yaml)
-- ✅ Success/error toast feedback with proper ARIA
-- ✅ 4 comprehensive E2E tests (all passing)
-- ✅ Cross-platform UUID fix for browser compatibility
-- ✅ Canvas layout fix (controls visible without scrolling)
-- ✅ Design system documentation (design-principles.md, style-guide.md)
+**Deliverables Summary (P1.4):**
+- ✅ ServiceNode and NetworkNode components implemented
+- ✅ blueprintToNodes converter renders services and networks with auto-layout
+- ✅ Auto-layout: services grid; networks horizontal row
+- ✅ Design tokens applied: border-blue-600 for services; success token for networks
+- ✅ 4 new E2E tests added (apps/web/e2e/canvas-render.spec.ts)
+- ✅ All tests passing: 58 unit + 11 E2E
 
 ---
 
@@ -438,4 +436,4 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 ---
 
-_Last updated: 2025-10-03 | Next review: End of P3 (Conflict Lint)_
+_Last updated: 2025-10-04 | Next review: End of P3 (Conflict Lint)_
