@@ -12,15 +12,18 @@ import {
 import "@xyflow/react/dist/style.css";
 
 import { useCanvasStore } from "@/lib/store";
-import CanvasNode from "./CanvasNode";
+// Note: Conversion from blueprint → nodes happens in store.setBlueprint.
+// Canvas consumes nodes/edges from the store as the single source of truth.
+import ServiceNode from "@/components/nodes/ServiceNode";
+import NetworkNode from "@/components/nodes/NetworkNode";
 
 const nodeTypes = {
-  canvasNode: CanvasNode,
+  serviceNode: ServiceNode,
+  networkNode: NetworkNode,
 };
 
 export default function Canvas() {
-  const { nodes, edges, onNodesChange, onEdgesChange, setEdges } =
-    useCanvasStore();
+  const { nodes, edges, onNodesChange, onEdgesChange, setEdges } = useCanvasStore();
 
   const onConnect: OnConnect = useCallback(
     (connection) => {
@@ -30,7 +33,7 @@ export default function Canvas() {
   );
 
   return (
-    <div className="w-full h-full min-h-0">
+     <div className="w-full h-full min-h-0" aria-label="Blueprint canvas">
       <ReactFlow
         nodes={nodes}
         edges={edges}
