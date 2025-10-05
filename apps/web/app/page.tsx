@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Canvas from "@/components/Canvas";
 import { FileUpload } from "@/components/FileUpload";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Home() {
   const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
@@ -16,10 +17,13 @@ export default function Home() {
 
   return (
     <div className="flex h-screen flex-col">
-      <div className="border-b bg-white p-4 shadow-sm">
+      <div className="border-b bg-card p-4 shadow-sm">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold text-gray-900">Dockitect</h1>
-          <FileUpload onSuccess={handleUploadSuccess} />
+          <h1 className="text-xl font-semibold text-foreground">Dockitect</h1>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <FileUpload onSuccess={handleUploadSuccess} />
+          </div>
         </div>
           {uploadSuccess && (
             <div
