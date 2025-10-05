@@ -7,14 +7,17 @@ import {
   applyNodeChanges,
   applyEdgeChanges,
 } from "@xyflow/react";
+import type { Blueprint } from "@dockitect/schema";
 
 export type CanvasState = {
   nodes: Node[];
   edges: Edge[];
+  blueprint: Blueprint | null;
   onNodesChange: OnNodesChange<Node>;
   onEdgesChange: OnEdgesChange<Edge>;
   setNodes: (nodes: Node[]) => void;
   setEdges: (edges: Edge[]) => void;
+  setBlueprint: (blueprint: Blueprint) => void;
   addNode: (node: Node) => void;
   addEdge: (edge: Edge) => void;
 };
@@ -22,6 +25,7 @@ export type CanvasState = {
 export const useCanvasStore = create<CanvasState>((set, get) => ({
   nodes: [],
   edges: [],
+  blueprint: null,
 
   onNodesChange: (changes) => {
     set({
@@ -38,6 +42,8 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
   setNodes: (nodes) => set({ nodes }),
 
   setEdges: (edges) => set({ edges }),
+
+  setBlueprint: (blueprint) => set({ blueprint }),
 
   addNode: (node) =>
     set({
