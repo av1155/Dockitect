@@ -276,6 +276,74 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 ---
 
+## P4.5: Intelligent Layout & Visual Grouping
+
+**Goal:** Make sparse/disconnected topologies visually appealing and informative, even when services lack explicit network connections.
+
+**Scope:**
+
+- Multiple layout algorithms beyond basic grid:
+    - **Hierarchical**: Dependencies flow top-to-bottom (services → networks → volumes)
+    - **Radial**: Network/volume in center, services radiating outward
+    - **Force-directed**: Physics-based organic layout (elk.js or dagre)
+    - **Swimlanes**: Group services by function/type in horizontal lanes
+- Semantic grouping for services without explicit connections:
+    - Group by image family (all linuxserver.io, official, custom)
+    - Group by shared volumes (even read-only mounts)
+    - Group by `depends_on` chains (show dependency flow)
+    - Group by labels (`dockitect.group: media-apps`)
+- Visual enhancements for implicit relationships:
+    - Dotted edges for `depends_on` (even without network connection)
+    - Visual indicators for shared volume paths between services
+    - Port exposure badges (show which services expose ports)
+    - Color-coding by image registry or service type
+- UI controls:
+    - Layout mode selector: Grid | Hierarchical | Radial | Force | Swimlanes | Manual
+    - "Beautify" button to auto-reorganize based on selected mode
+    - Snap-to-grid toggle for manual positioning
+    - Layout presets: "Media Server", "Web Stack", "Monitoring", "Database Cluster"
+- Preserve manual positioning when switching layouts (store both auto & manual positions)
+
+**Deliverables:**
+
+- Layout algorithm selector dropdown in canvas toolbar
+- 4+ layout algorithms implemented (grid already exists from P1.4)
+- Services auto-group by semantic relationships (image family, shared volumes, dependencies)
+- Visual indicators for `depends_on`, shared volumes, exposed ports
+- "Beautify" button triggers re-layout without losing manual node positions
+- Layout presets configurable via settings panel
+- E2E test: upload flat 10-service stack → switch to radial → verify nodes arranged in circle
+- Animated GIF: "Beautify Flat Stack → Organized Layout"
+
+**Acceptance Criteria:**
+
+- [ ] 4+ layout algorithms available (hierarchical, radial, force-directed, swimlanes)
+- [ ] Services with `depends_on` show dotted edges even without network connections
+- [ ] Services sharing volumes display visual link/badge
+- [ ] Image family grouping works (linuxserver.io services cluster together)
+- [ ] Layout mode persists in project settings (reload remembers selection)
+- [ ] "Beautify" button re-organizes without losing user-positioned nodes (toggle manual lock)
+- [ ] E2E test: media stack (13 services, host network) → radial layout → visually distinct groups
+- [ ] Code coverage ≥70% for layout algorithms
+
+**Risks & Rollback:**
+
+- Risk: Layout algorithms produce overlapping nodes → Mitigation: Test with real-world fixtures; add collision detection
+- Risk: Force-directed layout too slow for large graphs → Mitigation: Use web worker; limit to <50 nodes
+- Risk: User manual positioning lost on layout switch → Mitigation: Store both auto and manual positions; warn before overwrite
+- Rollback: Keep grid layout only; hide layout selector
+
+**Dependencies:**
+
+- Tech: `@dagrejs/dagre`, `elkjs`, or React Flow's built-in layout utilities
+- Sequencing: Requires P1.5 (edges visible), P4 (templates for testing varied topologies)
+
+**Estimated Effort:** **M** (4-5 days)
+
+**Status:** ⬜ PENDING
+
+---
+
 ## P5: Persistence & Settings
 
 **Goal:** Save blueprints to SQLite database, enable project management (create/open/delete), and add user preferences.
@@ -439,4 +507,4 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 ---
 
-_Last updated: 2025-10-04 | Next review: End of P3 (Conflict Lint)_
+_Last updated: 2025-10-05 | Next review: End of P3 (Conflict Lint)_

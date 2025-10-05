@@ -5,6 +5,8 @@
 ### 1. Blueprint Editor
 
 - **Visual canvas** for designing Docker stacks (React Flow) ✅
+- **Intelligent layout algorithms** (P4.5): hierarchical, radial, force-directed, swimlanes
+- **Semantic grouping** for sparse topologies: group by image family, shared volumes, dependencies
 - Drag-and-drop service composition (P1.5 - pending)
 - Three node types: **Host**, **Network** ✅, **Service** ✅
 - Multi-host topology support (NAS, Pi, VMs)

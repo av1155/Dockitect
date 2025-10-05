@@ -2542,6 +2542,160 @@ docs: add demo GIF for template usage
 
 ---
 
+## P4.5: Intelligent Layout & Visual Grouping ⬜
+
+**Status:** PENDING
+
+**Goal:** Make sparse/disconnected topologies visually appealing with smart layout algorithms and semantic grouping.
+
+**Files:**
+
+**New Files:**
+- `/apps/web/lib/layouts/` - Layout algorithm implementations
+  - `hierarchical.ts` - Top-down dependency flow layout
+  - `radial.ts` - Center-outward circular layout  
+  - `force-directed.ts` - Physics-based organic layout (using elkjs or dagre)
+  - `swimlanes.ts` - Horizontal lane grouping by function
+  - `index.ts` - Layout registry and selector
+- `/apps/web/components/LayoutSelector.tsx` - Dropdown to choose layout mode
+- `/apps/web/components/BeautifyButton.tsx` - Trigger auto-reorganization
+- `/apps/web/lib/grouping/` - Semantic grouping utilities
+  - `image-family.ts` - Group by linuxserver.io, official, custom
+  - `shared-volumes.ts` - Detect services sharing volume paths
+  - `dependency-chains.ts` - Parse depends_on relationships
+  - `label-groups.ts` - Group by dockitect.group labels
+- `/apps/web/tests/e2e/layout-switching.spec.ts` - E2E tests for layouts
+
+**Modified Files:**
+- `/apps/web/components/Canvas.tsx` - Integrate layout selector and beautify button
+- `/apps/web/lib/store.ts` - Add layout mode state, manual position locks
+- `/apps/web/lib/blueprintToNodes.ts` - Apply selected layout algorithm
+- `/apps/web/components/nodes/ServiceNode.tsx` - Add image family badges, port exposure indicators
+- `/apps/web/app/globals.css` - Add styles for dotted edges, group borders, badges
+
+**Commands:**
+
+```bash
+# Install layout libraries
+cd apps/web
+pnpm add @dagrejs/dagre elkjs
+pnpm add -D @types/dagre
+
+# Create directory structure
+mkdir -p lib/layouts lib/grouping
+
+# Run layout tests
+pnpm test -- layout
+cd ../.. && pnpm test:e2e -- layout-switching.spec.ts
+```
+
+**Implementation Tasks:**
+
+**Phase 1: Layout Infrastructure**
+- [ ] Create layout registry in `/apps/web/lib/layouts/index.ts`
+- [ ] Implement hierarchical layout (dagre or custom)
+- [ ] Implement radial layout (custom algorithm)
+- [ ] Implement force-directed layout (elkjs)
+- [ ] Implement swimlanes layout (custom with grouping)
+- [ ] Add layout selector dropdown component
+- [ ] Wire layout selector to store state
+
+**Phase 2: Semantic Grouping**
+- [ ] Implement image family detection (linuxserver.io, official, ghcr.io, etc.)
+- [ ] Implement shared volume detection (services mounting same path)
+- [ ] Implement depends_on chain extraction
+- [ ] Implement label-based grouping (dockitect.group: X)
+- [ ] Add visual group boundaries/containers on canvas
+- [ ] Color-code services by image family
+
+**Phase 3: Visual Enhancements**
+- [ ] Add dotted edge style for depends_on relationships
+- [ ] Add volume sharing indicators (visual link between services)
+- [ ] Add port exposure badges to ServiceNode (show exposed port count)
+- [ ] Add image family badge to ServiceNode (show registry icon)
+- [ ] Style adjustments for group containers (borders, backgrounds)
+- [ ] Dark mode support for new visual elements
+
+**Phase 4: Beautify Feature**
+- [ ] Create BeautifyButton component
+- [ ] Implement "beautify" action (re-applies selected layout)
+- [ ] Add manual position lock toggle (preserve user positioning)
+- [ ] Store both auto-layout and manual positions in store
+- [ ] Warn user before overwriting manual positions
+- [ ] Add keyboard shortcut (Ctrl/Cmd+B for beautify)
+
+**Phase 5: Layout Presets**
+- [ ] Define preset layouts: Media Server, Web Stack, Monitoring, Database
+- [ ] Preset selector in settings panel
+- [ ] Save preset preference to localStorage
+- [ ] Apply preset on blueprint load
+- [ ] Document preset heuristics (when to use which)
+
+**Phase 6: Testing**
+- [ ] Unit tests for each layout algorithm (grid, hierarchical, radial, force, swimlanes)
+- [ ] Unit tests for grouping utilities (image family, volumes, depends_on)
+- [ ] E2E test: upload flat media stack (13 services) → switch to radial → verify circular arrangement
+- [ ] E2E test: beautify button → verify nodes reorganize without losing manual locks
+- [ ] E2E test: layout mode persists after page reload
+- [ ] Visual regression tests for each layout mode (Playwright screenshots)
+
+**Tests:**
+
+- Unit: Each layout algorithm returns valid node positions without overlaps
+- Unit: Image family grouping correctly identifies linuxserver.io services
+- Unit: Shared volume detection finds services mounting `/config`
+- E2E: Upload media stack → select radial layout → nodes form circle around network
+- E2E: Manual position → toggle lock → beautify → manual position preserved
+- E2E: Switch layout mode → reload page → layout mode restored
+
+**Docs:**
+
+- Update architecture.md with layout algorithm details
+- Document layout selection in user guide
+- Add "Layout Tips" section explaining when to use each mode
+- Document layout presets in settings guide
+
+**Commit:**
+
+```
+feat(canvas): add intelligent layout algorithms and semantic grouping
+
+- Implement 4 layout modes: hierarchical, radial, force-directed, swimlanes
+- Add semantic grouping by image family, shared volumes, dependencies
+- Visual enhancements: dotted depends_on edges, port badges, volume links
+- Beautify button with manual position lock
+- Layout presets for common stack types
+
+Fixes visual monotony for sparse/flat topologies (e.g., media stacks)
+```
+
+**PR:**
+
+- Title: `feat(canvas): intelligent layout algorithms for sparse topologies`
+- Description:
+    - Addresses issue: flat stacks (host network, no explicit connections) look boring
+    - 4 new layout algorithms with visual examples
+    - Semantic grouping makes relationships visible even without network edges
+    - Beautify feature with before/after screenshots
+    - E2E tests verify each layout mode
+- Labels: `type: feature`, `phase: p4.5`, `priority: high`, `area: ui`, `ux-improvement`
+- Reviewers: @maintainer
+- Screenshots: Before/after for each layout mode (grid, hierarchical, radial, force, swimlanes)
+
+**Success Criteria:**
+
+- [ ] 4+ layout algorithms implemented and selectable
+- [ ] Media stack example (13 services, host network) looks visually distinct in each layout
+- [ ] depends_on relationships visible with dotted edges
+- [ ] Services sharing volumes show visual link/badge
+- [ ] Image family color-coding applied (linuxserver = blue, official = green, etc.)
+- [ ] Layout mode persists across page reloads
+- [ ] Beautify button works without losing manual node positions (when locked)
+- [ ] E2E tests pass for layout switching and beautify
+- [ ] Code coverage ≥70% for layout and grouping modules
+
+---
+
 ## P5: Persistence & Settings
 
 ### P5.1: Set Up Prisma + SQLite ⬜

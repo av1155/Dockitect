@@ -252,6 +252,44 @@ Notes on design tokens:
 - Tokens align with the project style guide in `context/style-guide.md`
 - Dark mode maintains WCAG 2.2 AA contrast ratios
 
+### Layout Algorithms (P4.5 - Planned)
+
+Dockitect will support multiple layout algorithms to handle different topology patterns, especially sparse/flat stacks that lack explicit network connections.
+
+**Layout Modes:**
+- **Grid** (P1.4 - current): Simple grid layout with services in rows, networks below
+- **Hierarchical** (P4.5): Top-down dependency flow using dagre or custom algorithm
+- **Radial** (P4.5): Center-outward circular layout with network/volume at center
+- **Force-directed** (P4.5): Physics-based organic layout using elkjs for natural clustering
+- **Swimlanes** (P4.5): Horizontal lanes grouping services by function/type
+
+**Semantic Grouping:**
+
+For topologies with minimal explicit connections (e.g., `network_mode: host`), services are grouped by:
+- **Image family**: All linuxserver.io services cluster together, official images separate
+- **Shared volumes**: Services mounting the same path show visual link
+- **Dependencies**: `depends_on` chains displayed with dotted edges
+- **Labels**: Custom `dockitect.group` labels for manual grouping
+
+**Visual Indicators:**
+- Dotted edges for `depends_on` relationships (even without network connection)
+- Port exposure badges showing which services expose ports to host
+- Volume sharing indicators between services mounting same path
+- Color-coding by image registry (linuxserver.io, ghcr.io, docker.io, custom)
+
+**Implementation:**
+- Location: `apps/web/lib/layouts/` - Individual layout algorithms
+- Location: `apps/web/lib/grouping/` - Semantic grouping utilities
+- UI: Layout selector dropdown + "Beautify" button in canvas toolbar
+- State: Layout mode persists in project settings via Zustand + localStorage
+- Manual positioning: User can lock nodes to prevent beautify from moving them
+
+**Dependencies:**
+- `@dagrejs/dagre` - Hierarchical graph layout
+- `elkjs` - Force-directed layout engine
+- React Flow's positioning utilities for radial and swimlane layouts
+
+
 ## Key Design Decisions
 
 ### Why Not Use docker-compose.yml Directly?
@@ -310,6 +348,13 @@ See [ADR 0001](../adr/0001-blueprint-schema.md) for full rationale.
 - **Canvas rendering**: React Flow optimized for <100 nodes (sufficient for homelab scale)
 - **Database queries**: Indexed by project ID, <50ms reads
 - **Export speed**: Target <2s for 20-service compose (P7 success metric)
+
+### Layout Performance (P4.5)
+
+- **Layout calculation**: Target <200ms for graphs with <50 nodes
+- **Force-directed layout**: Run in web worker for graphs >20 nodes to prevent UI blocking
+- **Collision detection**: Bounding box checks to prevent overlapping nodes
+- **Caching**: Memoize layout results until blueprint changes
 
 ## Future Extensions (Post-MVP)
 
