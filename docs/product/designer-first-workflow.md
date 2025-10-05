@@ -1,10 +1,10 @@
 ---
-title: Designer-First Workflow: Create, Edit, Library
+title: "Designer-First Workflow: Create, Edit, Library"
 slug: designer-first-workflow
 status: Proposed
 owners: [community]
 lastUpdated: 2025-10-05
-phase: P2a, P3a
+phase: "P2a, P3a"
 ---
 
 # Designer-First Workflow: Create, Edit, Library
@@ -409,9 +409,9 @@ flowchart LR
   State((Blueprint v0<br/>Zustand Store))
   
   subgraph Packages
-    IMP[@dockitect/importer]
-    EXP[@dockitect/exporter]
-    SCHEMA[@dockitect/schema]
+    IMP[importer]
+    EXP[exporter]
+    SCHEMA[schema]
   end
   
   Library[(Library<br/>SQLite)]
