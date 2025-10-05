@@ -124,20 +124,22 @@ We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 ## 🗺️ Roadmap
 
-Current phase: **P1 - MVP Importer (Compose v2.x → Blueprint)** 🚧 (50% complete)
+Current phase: **P1 - MVP Importer (Compose v2.x → Blueprint)** 🚧 (80% complete)
 
 Completed:
 
 - ✅ **P0**: Repository & Project Setup
-- ✅ **P1.1**: Blueprint v0 Schema
-- ✅ **P1.2**: Compose v2.x Parser
+- ✅ **P1.1**: Blueprint v0 Schema (34 tests)
+- ✅ **P1.2**: Compose v2.x Parser (23 tests, 18 fixtures)
+- ✅ **P1.3**: File Upload UI Component (WCAG 2.2 AA compliant)
+- ✅ **P1.4**: Canvas Rendering with Dark Mode (11 E2E tests)
 
 Next up:
 
-- **P1.3**: File Upload UI Component
-- **P1.4**: Canvas Rendering of Imported Services
+- **P1.5**: Network Edges & Node Interactivity
+- **P1.6**: Import Validation & Error Handling
 - **P2**: MVP Exporter (Blueprint → Compose v2.x)
-- **P3**: Conflict Lint & Validation
+- **P3**: Conflict Detection & Validation
 
 See [docs/product/roadmap.md](docs/product/roadmap.md) for details.
 

@@ -1512,12 +1512,17 @@ feat(importer): implement Compose v2.x to Blueprint parser
 
 **Status:** COMPLETE (2025-10-04)
 
-**Deliverables Summary (P1.4):**
-- ✅ ServiceNode and NetworkNode components implemented
-- ✅ blueprintToNodes converter with auto-layout (grid for services; networks in horizontal row)
-- ✅ Design tokens applied: blue-600 for services; success for networks
-- ✅ 4 new E2E tests added (apps/web/e2e/canvas-render.spec.ts)
+**Deliverables Summary (P1.4 - Canvas + Production Importer):**
+- ✅ ServiceNode and NetworkNode components with design token styling
+- ✅ blueprintToNodes converter with auto-layout (grid for services, row for networks)
+- ✅ React Flow dark mode theming (CSS variables, Controls, MiniMap properly styled)
+- ✅ ThemeToggle component with localStorage persistence
+- ✅ Importer enhancements: ${VAR:-default} port syntax, boolean/number env coercion, on-failure:N normalization
+- ✅ 12 real-world production homelab compose files tested (dns, media, openwebui, etc.)
+- ✅ Real-world fixtures added to packages/importer/__fixtures__/real-world/
+- ✅ 4 new E2E tests for canvas rendering (11 total)
 - ✅ All tests passing: 58 unit + 11 E2E
+- ✅ Visual validation: light + dark modes verified
 
 **Files:**
 

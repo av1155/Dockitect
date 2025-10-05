@@ -121,13 +121,16 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 **Status:** 🟦 **IN PROGRESS** (P1.1-P1.4 complete; P1.5 and P1.6 next)
 
-**Deliverables Summary (P1.4):**
-- ✅ ServiceNode and NetworkNode components implemented
-- ✅ blueprintToNodes converter renders services and networks with auto-layout
-- ✅ Auto-layout: services grid; networks horizontal row
-- ✅ Design tokens applied: border-blue-600 for services; success token for networks
-- ✅ 4 new E2E tests added (apps/web/e2e/canvas-render.spec.ts)
+**Deliverables Summary (P1.4 - Canvas Rendering + Production Importer):**
+- ✅ ServiceNode and NetworkNode components with design token styling
+- ✅ blueprintToNodes converter with auto-layout (grid for services, row for networks)
+- ✅ React Flow dark mode theming (CSS variables, Controls, MiniMap)
+- ✅ ThemeToggle component with localStorage persistence
+- ✅ Importer enhancements: ${VAR:-default} port syntax, boolean/number env coercion, on-failure:N normalization
+- ✅ 12 real-world production compose files tested and added to fixtures
+- ✅ 4 new E2E tests for canvas rendering (11 total)
 - ✅ All tests passing: 58 unit + 11 E2E
+- ✅ Visual validation: light + dark modes verified
 
 ---
 
