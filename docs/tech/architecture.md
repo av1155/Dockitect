@@ -236,10 +236,21 @@ Components:
   - Accessibility: `role="group"`, ARIA labels, top/bottom handles
   - Design token: success border color (`var(--success)`) for network semantics
 
+**Dark Mode Theming** (P1.4):
+- React Flow `colorMode` prop with theme detection via MutationObserver
+- CSS variables mapped to design tokens for Controls and MiniMap
+- ThemeToggle component (`apps/web/components/ThemeToggle.tsx`) with localStorage persistence
+- CSS variable customization in `apps/web/app/globals.css`:
+  - `--xy-controls-button-background-color-default/hover-default`
+  - `--xy-controls-button-border-color-default`
+  - `--xy-minimap-background-color-default`
+  - Values mapped to: `var(--card)`, `var(--secondary)`, `var(--border)`, `var(--foreground)`
+
 Notes on design tokens:
 - Services use the blue-600 token to convey primary interactive entities
-- Networks use the success token to differentiate infrastructure links
+- Networks use the success token (`var(--success)`) to differentiate infrastructure links
 - Tokens align with the project style guide in `context/style-guide.md`
+- Dark mode maintains WCAG 2.2 AA contrast ratios
 
 ## Key Design Decisions
 
