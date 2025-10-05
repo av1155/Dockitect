@@ -31,6 +31,10 @@ services:
             - DOZZLE_ENABLE_ACTIONS=true
             - DOZZLE_AUTH_PROVIDER=simple
             - DOZZLE_REMOTE_AGENT=${DOZZLE_REMOTE_AGENT}
+        # "Paused" remote agents:
+        #   ct-database-ip:7007
+        #   ct-kestra-ip:7007
+        #   ct-dokploy-ip:7007
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - /root/docker/utilities-stack/dozzle:/data

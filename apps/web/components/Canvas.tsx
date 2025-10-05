@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   ReactFlow,
   Background,
@@ -9,7 +9,7 @@ import {
   type OnConnect,
   addEdge,
 } from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
+import "@xyflow/react/dist/base.css";
 
 import { useCanvasStore } from "@/lib/store";
 // Note: Conversion from blueprint → nodes happens in store.setBlueprint.
@@ -32,6 +32,21 @@ export default function Canvas() {
     [edges, setEdges]
   );
 
+  const [colorMode, setColorMode] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const updateColorMode = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      setColorMode(isDark ? "dark" : "light");
+    };
+    updateColorMode();
+
+    const observer = new MutationObserver(() => updateColorMode());
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
      <div className="w-full h-full min-h-0" aria-label="Blueprint canvas">
       <ReactFlow
@@ -43,10 +58,16 @@ export default function Canvas() {
         nodeTypes={nodeTypes}
         proOptions={{ hideAttribution: true }}
         fitView
+        colorMode={colorMode}
       >
         <Background />
-        <Controls />
-        <MiniMap />
+        <Controls className="rounded-md" />
+        <MiniMap
+          bgColor="var(--card)"
+          maskColor="rgba(0,0,0,0.4)"
+          nodeColor={() => "var(--muted-foreground)"}
+          nodeStrokeColor="transparent"
+        />
       </ReactFlow>
     </div>
   );

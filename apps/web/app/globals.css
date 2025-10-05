@@ -122,3 +122,36 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* React Flow theming via CSS variables */
+.react-flow {
+  /* Controls */
+  --xy-controls-button-background-color-default: var(--card);
+  --xy-controls-button-background-color-hover-default: var(--secondary);
+  --xy-controls-button-border-color-default: var(--border);
+  --xy-controls-button-color-default: var(--foreground);
+  --xy-controls-button-color-hover-default: var(--foreground);
+  --xy-controls-box-shadow-default: 0 1px 2px 0 var(--border);
+
+  /* MiniMap */
+  --xy-minimap-background-color-default: var(--card);
+
+  /* Attribution */
+  --xy-attribution-background-color-default: var(--card);
+}
+
+.react-flow.dark {
+  /* Controls */
+  --xy-controls-button-background-color-default: var(--card);
+  --xy-controls-button-background-color-hover-default: var(--secondary);
+  --xy-controls-button-border-color-default: var(--border);
+  --xy-controls-button-color-default: var(--foreground);
+  --xy-controls-button-color-hover-default: var(--foreground);
+  --xy-controls-box-shadow-default: 0 1px 2px 0 var(--border);
+
+  /* MiniMap */
+  --xy-minimap-background-color-default: var(--card);
+
+  /* Attribution */
+  --xy-attribution-background-color-default: var(--card);
+}
