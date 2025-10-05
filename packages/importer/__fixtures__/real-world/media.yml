@@ -1,0 +1,224 @@
+services:
+    prowlarr:
+        image: ghcr.io/linuxserver/prowlarr:latest
+        container_name: prowlarr
+        network_mode: host
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+        volumes:
+            - /root/docker/media-stack/prowlarr/config:/config
+        restart: unless-stopped
+
+    radarr:
+        image: ghcr.io/linuxserver/radarr:latest
+        container_name: radarr
+        network_mode: host
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+        volumes:
+            - /root/docker/media-stack/radarr/config:/config
+            - /mnt/nas-media/Movies:/movies
+            - /mnt/nas-media/Downloads:/downloads
+        restart: unless-stopped
+
+    sonarr:
+        image: ghcr.io/linuxserver/sonarr:latest
+        container_name: sonarr
+        network_mode: host
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+        volumes:
+            - /root/docker/media-stack/sonarr/config:/config
+            - /mnt/nas-media/TV Shows:/tv
+            - /mnt/nas-media/Downloads:/downloads
+        restart: unless-stopped
+
+    sabnzbd:
+        image: lscr.io/linuxserver/sabnzbd:latest
+        container_name: sabnzbd
+        ports:
+            - "8080:8080"
+        environment:
+            - PUID=0
+            - PGID=0
+            - TZ=America/New_York
+        volumes:
+            - /root/docker/media-stack/sabnzbd/config:/config
+            - /mnt/nas-media/Downloads:/downloads
+        restart: unless-stopped
+
+    profilarr:
+        image: santiagosayshey/profilarr:latest
+        container_name: profilarr
+        ports:
+            - "6868:6868"
+        volumes:
+            - /root/docker/media-stack/profilarr/config:/config
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+        restart: unless-stopped
+
+    plex:
+        image: lscr.io/linuxserver/plex:latest
+        container_name: plex
+        network_mode: host
+        healthcheck:
+            test: wget --no-verbose --tries=1 --spider http://localhost:32400/web || exit 1
+        devices:
+            - /dev/dri:/dev/dri
+        environment:
+            - TZ=America/New_York
+            - VERSION=docker
+            - PUID=0
+            - PGID=0
+            # - PLEX_CLAIM=your_claim_token
+        tmpfs:
+            - /ram-transcode:size=6G
+        volumes:
+            - /root/docker/media-stack/plex:/config
+            - /mnt/nas-media:/media
+            - /mnt/plex-nfs-transcode:/nfs-transcode
+        restart: unless-stopped
+
+    overseerr:
+        image: sctx/overseerr:latest
+        container_name: overseerr
+        network_mode: host
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+        volumes:
+            - /root/docker/media-stack/overseerr/config:/app/config
+        restart: unless-stopped
+
+    maintainerr:
+        image: ghcr.io/jorenn92/maintainerr:latest
+        container_name: maintainerr
+        network_mode: host
+        user: "0:0"
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+            # Uncomment and adjust if needed
+            # - BASE_PATH=/maintainerr         # serve from subdirectory
+            # - UI_HOSTNAME=::                 # listen on IPv6 (default 0.0.0.0)
+            # - UI_PORT=6247                   # change UI port (default 6246)
+            # - API_PORT=3002                  # change API port (default 3001)
+        volumes:
+            - /root/docker/media-stack/maintainerr/data:/opt/data
+        restart: unless-stopped
+
+    tdarr:
+        image: ghcr.io/haveagitgat/tdarr:latest
+        container_name: tdarr
+        network_mode: host
+        devices:
+            - /dev/dri:/dev/dri
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+            - UMASK_SET=002
+            - serverIP=0.0.0.0
+            - serverPort=8266
+            - webUIPort=8265
+            - serverURL=${TDARR_SERVER_URL}
+            - internalNode=true
+            - priority=0
+            - inContainer=true
+            - ffmpegVersion=7
+            - nodeName=internal-node
+            - auth=true
+            - apiKey=${TDARR_NODE_KEY} # Generated from Tools -> API Keys after creating a user and signing in
+            - openBrowser=false
+            - maxLogSizeMB=10
+            - cronPluginUpdate=0 0 * * *
+        volumes:
+            - /root/docker/media-stack/tdarr/server:/app/server
+            - /root/docker/media-stack/tdarr/configs:/app/configs
+            - /root/docker/media-stack/tdarr/logs:/app/logs
+            - /mnt/nas-media:/media
+            - /mnt/tdarr-cache:/temp
+        restart: unless-stopped
+
+    cleanuparr:
+        image: ghcr.io/cleanuparr/cleanuparr:latest
+        container_name: cleanuparr
+        network_mode: host
+        volumes:
+            - /root/docker/media-stack/cleanuparr/config:/config
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+            - UMASK=022
+            - PORT=11011
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:11011/health"]
+            interval: 30s
+            timeout: 10s
+            start_period: 30s
+            retries: 3
+        restart: unless-stopped
+
+    huntarr:
+        image: ghcr.io/plexguide/huntarr:latest
+        container_name: huntarr
+        network_mode: host
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+        volumes:
+            - /root/docker/media-stack/huntarr/config:/config
+        restart: unless-stopped
+
+    flaresolverr:
+        image: 21hsmw/flaresolverr:nodriver
+        container_name: flaresolverr
+        ports:
+            - "${PORT:-8191}:8191"
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+            - LOG_LEVEL=${LOG_LEVEL:-info}
+            - LOG_HTML=${LOG_HTML:-false}
+            - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+            - DRIVER=${DRIVER:-nodriver}
+        restart: unless-stopped
+
+    metube:
+        image: ghcr.io/alexta69/metube
+        container_name: metube
+        ports:
+            - 8083:8081
+        environment:
+            - TZ=America/New_York
+            - PUID=0
+            - PGID=0
+            - DELETE_FILE_ON_TRASHCAN=true
+        volumes:
+            - /mnt/nas-media/YouTube:/downloads
+        restart: unless-stopped
+
+    # recyclarr: # Replaced by Profilarr
+    #     image: ghcr.io/recyclarr/recyclarr:latest
+    #     container_name: recyclarr
+    #     environment:
+    #         - TZ=America/New_York
+    #         - PUID=0
+    #         - PGID=0
+    #     volumes:
+    #         - /root/docker/media-stack/recyclarr/config:/config
+    #     restart: unless-stopped

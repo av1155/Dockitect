@@ -4,17 +4,17 @@
 
 ### 1. Blueprint Editor
 
-- **Visual canvas** for designing Docker stacks (React Flow)
-- Drag-and-drop service composition
-- Three node types: **Host**, **Network**, **Service**
+- **Visual canvas** for designing Docker stacks (React Flow) ✅
+- Drag-and-drop service composition (P1.5 - pending)
+- Three node types: **Host**, **Network** ✅, **Service** ✅
 - Multi-host topology support (NAS, Pi, VMs)
 - Basic service configuration:
-    - Image selection
-    - Port mappings (host:container)
-    - Environment variables
-    - Volume mounts (bind mounts + named volumes)
-    - Network connections
-    - Startup dependencies
+    - Image selection ✅
+    - Port mappings (host:container) ✅
+    - Environment variables ✅
+    - Volume mounts (bind mounts + named volumes) ✅
+    - Network connections ✅
+    - Startup dependencies ✅
 
 ### 2. Import/Export (Bidirectional)
 
@@ -56,7 +56,7 @@
 - **Projects**: Create, open, save, delete blueprints
 - **Auto-save**: Debounced save (2s after last change)
 - **Version control**: Blueprint v0 schema with migration path to v1+
-- **Settings**: Theme (light/dark), export format preferences, telemetry opt-in (default: off)
+- **Settings**: ✅ Theme (light/dark with toggle), export format preferences, telemetry opt-in (default: off)
 
 ## Out of Scope (Post-MVP)
 

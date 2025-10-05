@@ -1508,7 +1508,21 @@ feat(importer): implement Compose v2.x to Blueprint parser
  
 ---
 
-### P1.4: Render Service Nodes on Canvas ⬜
+### P1.4: Render Service Nodes on Canvas ✅
+
+**Status:** COMPLETE (2025-10-04)
+
+**Deliverables Summary (P1.4 - Canvas + Production Importer):**
+- ✅ ServiceNode and NetworkNode components with design token styling
+- ✅ blueprintToNodes converter with auto-layout (grid for services, row for networks)
+- ✅ React Flow dark mode theming (CSS variables, Controls, MiniMap properly styled)
+- ✅ ThemeToggle component with localStorage persistence
+- ✅ Importer enhancements: ${VAR:-default} port syntax, boolean/number env coercion, on-failure:N normalization
+- ✅ 12 real-world production homelab compose files tested (dns, media, openwebui, etc.)
+- ✅ Real-world fixtures added to packages/importer/__fixtures__/real-world/
+- ✅ 4 new E2E tests for canvas rendering (11 total)
+- ✅ All tests passing: 58 unit + 11 E2E
+- ✅ Visual validation: light + dark modes verified
 
 **Files:**
 
@@ -1528,10 +1542,11 @@ cd apps/web
 
 - Unit: blueprintToNodes converts Blueprint to React Flow node format
 - E2E: upload jellyfin.yml → verify 1 service node rendered with correct label
+- E2E: multi-service → ≥3 services rendered; networks rendered when present; no nodes before upload
 
 **Docs:**
 
-- Update architecture.md with canvas rendering details
+- Update architecture.md with canvas rendering details (converter logic, components, auto-layout, tokens)
 
 **Commit:**
 

@@ -1,9 +1,0 @@
-services:
-    adguardhome:
-        container_name: adguardhome
-        image: adguard/adguardhome:latest
-        restart: unless-stopped
-        network_mode: host
-        volumes:
-            - /root/docker/dns-stack/adguardhome/work:/opt/adguardhome/work
-            - /root/docker/dns-stack/adguardhome/conf:/opt/adguardhome/conf

@@ -113,15 +113,13 @@ export function importDockerCompose(composeYaml: string): Blueprint {
     }
 
     if (config.restart) {
-      const restart = config.restart as
-        | "no"
-        | "always"
-        | "unless-stopped"
-        | "on-failure";
-      if (
-        ["no", "always", "unless-stopped", "on-failure"].includes(restart)
+      let restart = config.restart as string;
+      if (restart.startsWith("on-failure")) {
+        service.restart = "on-failure";
+      } else if (
+        ["no", "always", "unless-stopped"].includes(restart)
       ) {
-        service.restart = restart;
+        service.restart = restart as "no" | "always" | "unless-stopped";
       }
     }
 
@@ -157,7 +155,7 @@ export function importDockerCompose(composeYaml: string): Blueprint {
 }
 
 function normalizeEnvironment(
-  env: Record<string, string> | string[],
+  env: Record<string, any> | string[],
 ): Record<string, string> {
   if (Array.isArray(env)) {
     const result: Record<string, string> = {};
@@ -169,7 +167,11 @@ function normalizeEnvironment(
     }
     return result;
   }
-  return env;
+  const result: Record<string, string> = {};
+  for (const [key, value] of Object.entries(env)) {
+    result[key] = typeof value === "string" ? value : String(value);
+  }
+  return result;
 }
 
 function normalizeLabels(
@@ -189,19 +191,55 @@ function normalizeLabels(
 }
 
 function parsePorts(ports: string[]): Port[] {
-  return ports.map((portDef) => {
-    const match = portDef.match(/^(\d+):(\d+)(?:\/(tcp|udp))?$/);
-    if (!match) {
-      throw new Error(`Invalid port definition: ${portDef}`);
-    }
+  return ports
+    .map((portDef) => {
+      let match = portDef.match(/^(\d+):(\d+)(?:\/(tcp|udp))?$/);
+      if (match) {
+        const [, hostPort, containerPort, protocol] = match;
+        return {
+          host: Number.parseInt(hostPort, 10),
+          container: Number.parseInt(containerPort, 10),
+          protocol: (protocol as "tcp" | "udp") || "tcp",
+        };
+      }
 
-    const [, hostPort, containerPort, protocol] = match;
-    return {
-      host: Number.parseInt(hostPort, 10),
-      container: Number.parseInt(containerPort, 10),
-      protocol: (protocol as "tcp" | "udp") || "tcp",
-    };
-  });
+      match = portDef.match(/^\$\{[^}]+:-(\d+)\}:(\d+)(?:\/(tcp|udp))?$/);
+      if (match) {
+        const [, defaultHostPort, containerPort, protocol] = match;
+        return {
+          host: Number.parseInt(defaultHostPort, 10),
+          container: Number.parseInt(containerPort, 10),
+          protocol: (protocol as "tcp" | "udp") || "tcp",
+        };
+      }
+
+      match = portDef.match(/^(\d+):\$\{[^}]+:-(\d+)\}(?:\/(tcp|udp))?$/);
+      if (match) {
+        const [, hostPort, defaultContainerPort, protocol] = match;
+        return {
+          host: Number.parseInt(hostPort, 10),
+          container: Number.parseInt(defaultContainerPort, 10),
+          protocol: (protocol as "tcp" | "udp") || "tcp",
+        };
+      }
+
+      match = portDef.match(/^\$\{[^}]+:-(\d+)\}:\$\{[^}]+:-(\d+)\}(?:\/(tcp|udp))?$/);
+      if (match) {
+        const [, defaultHostPort, defaultContainerPort, protocol] = match;
+        return {
+          host: Number.parseInt(defaultHostPort, 10),
+          container: Number.parseInt(defaultContainerPort, 10),
+          protocol: (protocol as "tcp" | "udp") || "tcp",
+        };
+      }
+
+      if (portDef.includes("${")) {
+        return null;
+      }
+
+      throw new Error(`Invalid port definition: ${portDef}`);
+    })
+    .filter((port): port is Port => port !== null);
 }
 
 function parseVolumes(volumes: string[]): Volume[] {
