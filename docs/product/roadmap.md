@@ -102,8 +102,8 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 - [x] **P1.2:** Importer handles 6 test fixtures without errors
 - [x] **P1.3:** File upload UI component integrated
 - [x] **P1.4:** Canvas renders ≥3 service nodes from multi-service compose
-- [ ] **P1.5:** Network edges connect services correctly
-- [ ] **P1.6:** E2E test uploads jellyfin.yml and asserts 1 service node visible
+- [x] **P1.5:** Network edges connect services correctly — COMPLETE (2025-10-06)
+- [x] **P1.6:** E2E test uploads jellyfin.yml and asserts 1 service node visible
 - [x] Code coverage ≥80% for importer package (23 tests passing)
 
 **Risks & Rollback:**
@@ -119,7 +119,7 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 
 **Estimated Effort:** **L** (5-7 days)
 
-**Status:** 🟦 **IN PROGRESS** (P1.1-P1.4 complete; P1.5 and P1.6 next)
+**Status:** ✅ **COMPLETE** (Merged to main on 2025-10-06)
 
 **Deliverables Summary (P1.4 - Canvas Rendering + Production Importer):**
 - ✅ ServiceNode and NetworkNode components with design token styling
@@ -131,6 +131,19 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 - ✅ 4 new E2E tests for canvas rendering (11 total)
 - ✅ All tests passing: 58 unit + 11 E2E
 - ✅ Visual validation: light + dark modes verified
+
+**Deliverables Summary (P1.5 - Network Edges & Visual Polish):**
+- ✅ Hierarchical auto-layout (services top, networks below, centered)
+- ✅ Styled network edges (success green, bezier curves, arrow markers)
+- ✅ ServiceNode and NetworkNode click handlers with keyboard support
+- ✅ NodeDetailsPanel with tabs (Overview, Env, Volumes, Ports, Networks) and copy-to-clipboard
+- ✅ CanvasControls (Fit View, Export PNG, Auto-layout) at top-right
+- ✅ Auto-fit view after file upload for better UX
+- ✅ Export PNG captures React Flow canvas properly
+- ✅ Removed duplicate Fit View button
+- ✅ 4 new E2E tests for node interaction (15 total E2E tests)
+- ✅ Visual validation: PASS (light + dark modes, edges visible with arrows)
+- ✅ All tests passing: 58 unit + 15 E2E
 
 ---
 

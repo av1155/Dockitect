@@ -211,32 +211,103 @@ The importer package (`@dockitect/importer`) transforms docker-compose.yml files
 - Invalid port formats
 - Schema validation failures
 
-### Canvas Rendering (P1.4 - Implemented)
+### Canvas Rendering (P1.5 - Implemented)
 
 - Location: `apps/web/lib/blueprintToNodes.ts`
 - Converter: `blueprintToNodes(blueprint)` returns `{ nodes, edges }` consumed by React Flow
-- Auto-layout algorithm:
-  - Services laid out on a grid
+- Hierarchical auto-layout (top-down):
+  - Services at the top arranged on a grid
     - `spacing = 200`
-    - `cols = ceil(sqrt(serviceCount))`, `rows = ceil(serviceCount / cols)`
+    - `cols = ceil(sqrt(max(1, serviceCount)))`
+    - `maxServiceRows = ceil(serviceCount / cols)`
     - Position per service: `{ x: col * spacing, y: row * spacing }`
-  - Networks laid out in a single horizontal row below services
-    - `networkY = max(rows * spacing + 150, 300)`
-    - Position per network: `{ x: index * spacing, y: networkY }`
+  - Networks below services on a single horizontal row
+    - `networkGap = 150`; `networkY = maxServiceRows * spacing + networkGap`
+    - Horizontal centering:
+      - `totalServiceWidth = cols * spacing`
+      - `networkStartX = networkCount > 1 ? max(0, (totalServiceWidth - (networkCount - 1) * spacing) / 2) : totalServiceWidth / 2 - 100`
+    - Position per network: `{ x: networkStartX + index * spacing, y: networkY }`
 - Edges:
   - For each `service.networks[]`, create an edge: `service-${service.id}` → `network-${netId}`
-
-Components:
-- `ServiceNode` (`apps/web/components/nodes/ServiceNode.tsx`)
-  - Renders service name, image, and ports count
-  - Accessibility: `role="group"`, ARIA labels, top/bottom handles
-  - Design token: blue border (`border-blue-600`, dark: `border-blue-500`)
-- `NetworkNode` (`apps/web/components/nodes/NetworkNode.tsx`)
-  - Renders network name and driver (defaults to `bridge`)
-  - Accessibility: `role="group"`, ARIA labels, top/bottom handles
-  - Design token: success border color (`var(--success)`) for network semantics
-
-**Dark Mode Theming** (P1.4):
+  - Styling:
+    - type: `bezier` (curved)
+    - color: `var(--success)` (green)
+    - strokeWidth: `2`
+    - arrow markers: `MarkerType.ArrowClosed`
+    - animated: `false` (respects prefers-reduced-motion)
+ 
+ Components:
+  - `ServiceNode` (`apps/web/components/nodes/ServiceNode.tsx`)
+    - Renders service name, image, and ports count
+    - Accessibility: `role="button"`, ARIA labels, top/bottom handles
+    - Click handler updates `selectedNode`
+    - Keyboard: Tab focusable (tabIndex=0); Enter/Space open details
+    - Hover: subtle scale and drop shadow for affordance
+    - Design token: primary border color via `border-primary` token
+  - `NetworkNode` (`apps/web/components/nodes/NetworkNode.tsx`)
+    - Renders network name and driver (defaults to `bridge`)
+    - Accessibility: `role="button"`, ARIA labels, top/bottom handles
+    - Click handler updates `selectedNode`
+    - Keyboard: Tab focusable (tabIndex=0); Enter/Space open details
+    - Hover: subtle scale and drop shadow for affordance
+    - Design token: success border color (`var(--success)`) for network semantics
+ 
+ ## Node Interaction & Details Panel (P1.5)
+ 
+ **State Management:**
+- `selectedNode: Node | null` in Zustand store (`apps/web/lib/store.ts`)
+- `setBlueprint(blueprint)` computes `{ nodes, edges }` via `blueprintToNodes` and updates store
+- Set via click handlers in ServiceNode and NetworkNode components (click or Enter/Space)
+- Auto-fit view after blueprint load and on auto-layout: `fitView({ padding: 0.2, duration: 300 })`
+- Cleared when details panel closes (Esc, outside click, Sheet onOpenChange)
+ 
+ **Components:**
+ 
+ 1. **NodeDetailsPanel** (`apps/web/components/NodeDetailsPanel.tsx`)
+    - Radix UI Sheet component (accessible, keyboard-friendly)
+    - Tabs: Overview, Environment, Volumes, Ports, Networks
+    - Copy-to-clipboard for values (navigator.clipboard API)
+    - Keyboard: Tab navigation, Enter/Space to activate, Esc to close
+ 
+  2. **CanvasControls** (`apps/web/components/CanvasControls.tsx`)
+     - React Flow Panel positioned at top-right
+     - Buttons: Fit View, Export PNG, Auto-layout
+     - Fit View: calls `fitView({ padding: 0.2, duration: 300 })`
+     - PNG export uses html-to-image library targeting `.react-flow` container and filters out Controls/Minimap/Panel
+     - Auto-layout: re-applies `blueprintToNodes(blueprint)` then calls Fit View
+ 
+  **Accessibility & Keyboard Navigation (P1.5):**
+  - All interactive nodes have role="button", tabIndex={0}
+  - Keyboard support: Tab to focus; Enter/Space to open details
+  - Esc closes the details panel (Radix Sheet onOpenChange)
+  - Focus-visible rings for keyboard navigation
+  - ARIA labels on all controls and buttons
+  - Details panel implements focus trap (via Radix Sheet)
+ 
+  **Layout & Positioning:**
+  - React Flow Controls: bottom-left
+  - MiniMap: bottom-right (160x110px)
+  - CanvasControls: top-right (card wrapper for visibility)
+  - Network nodes: positioned below services with horizontal centering
+  - Edge elevation: `elevateEdgesOnSelect` for visibility
+ 
+  **Edge Styling (P1.5):**
+  - Type: bezier (curved)
+  - Color: `var(--success)` (green)
+  - Stroke width: 2px
+  - Arrow markers: ArrowClosed type
+  - Not animated (honors prefers-reduced-motion)
+ 
+ ## User Interactions (P1.5)
+ 
+ - Click a service or network node → opens Node Details Panel
+ - Esc key → closes the panel (and clears `selectedNode`)
+ - Keyboard: Tab to focus nodes/controls; Enter/Space to activate/open
+ - Fit View → auto-fits the graph with padding and 300ms animation
+ - Export PNG → captures the canvas (nodes/edges) and excludes controls/minimap/panels
+ - Auto-layout → re-applies hierarchical positioning (services on top, networks below) and triggers Fit View
+ 
+  **Dark Mode Theming** (P1.5):
 - React Flow `colorMode` prop with theme detection via MutationObserver
 - CSS variables mapped to design tokens for Controls and MiniMap
 - ThemeToggle component (`apps/web/components/ThemeToggle.tsx`) with localStorage persistence
@@ -247,7 +318,7 @@ Components:
   - Values mapped to: `var(--card)`, `var(--secondary)`, `var(--border)`, `var(--foreground)`
 
 Notes on design tokens:
-- Services use the blue-600 token to convey primary interactive entities
+- Services use the primary token via Tailwind `border-primary`
 - Networks use the success token (`var(--success)`) to differentiate infrastructure links
 - Tokens align with the project style guide in `context/style-guide.md`
 - Dark mode maintains WCAG 2.2 AA contrast ratios

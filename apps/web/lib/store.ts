@@ -14,6 +14,7 @@ export type CanvasState = {
   nodes: Node[];
   edges: Edge[];
   blueprint: Blueprint | null;
+  selectedNode: Node | null;
   onNodesChange: OnNodesChange<Node>;
   onEdgesChange: OnEdgesChange<Edge>;
   setNodes: (nodes: Node[]) => void;
@@ -21,12 +22,14 @@ export type CanvasState = {
   setBlueprint: (blueprint: Blueprint) => void;
   addNode: (node: Node) => void;
   addEdge: (edge: Edge) => void;
+  setSelectedNode: (node: Node | null) => void;
 };
 
 export const useCanvasStore = create<CanvasState>((set, get) => ({
   nodes: [],
   edges: [],
   blueprint: null,
+  selectedNode: null,
 
   onNodesChange: (changes) => {
     set({
@@ -58,4 +61,6 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
     set({
       edges: [...get().edges, edge],
     }),
+
+  setSelectedNode: (node) => set({ selectedNode: node }),
 }));

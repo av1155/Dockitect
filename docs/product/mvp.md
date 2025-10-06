@@ -82,7 +82,18 @@
 
 ## First-Week KPIs (from Dockitect.md vision)
 
-- ✅ 1 animated GIF in README
+- ✅ Visual evidence in README
+
+### Visuals
+
+![Network topology](../../assets/marketing/network.png)
+
+![Service details panel](../../assets/marketing/side-panel.png)
+
+![Network details panel](../../assets/marketing/side-panel-network.png)
+
+![Mobile layout + dark mode](../../assets/marketing/mobile-layout+dark-mode.png)
+
 - ✅ 1-click run (`pnpm dev` or `docker compose up`)
 - ✅ 3+ templates available
 - ✅ Import → canvas → export loop working end-to-end

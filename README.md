@@ -5,7 +5,21 @@
 
 Draw your topology on a canvas, then export **deterministic `docker-compose.yml`** you can run anywhere. Import existing Compose to visualize and fix conflicts. Self-hosted, beautiful, and fast.
 
-_Coming soon: Animated demo_
+## Screenshots
+
+<table>
+  <tr>
+    <td valign="top">
+      <img src="assets/marketing/network.png" alt="Network topology" width="520" /><br/>
+      <img src="assets/marketing/side-panel.png" alt="Service details panel" width="520" /><br/>
+      <img src="assets/marketing/side-panel-network.png" alt="Network details panel" width="520" />
+    </td>
+    <td valign="top">
+      <img src="assets/marketing/mobile-layout+dark-mode.png" alt="Mobile layout and dark mode" width="380" />
+    </td>
+  </tr>
+</table>
+
 
 ---
 
@@ -20,6 +34,17 @@ Homelabs grow messy: scattered `docker-compose.yml` files, port collisions, no s
 - **Appliance templates** (Jellyfin, Uptime Kuma, Immich, etc.)
 
 ---
+
+## Features
+
+- ✅ **Import Docker Compose files** - Upload and visualize your existing compose files
+- ✅ **Visual Canvas** - Interactive node-based visualization with React Flow
+- ✅ **Network Topology** - See connections between services and networks with styled edges
+- ✅ **Interactive Nodes** - Click nodes to view full service/network details
+- ✅ **Details Panel** - Comprehensive view of environment variables, volumes, ports, and networks
+- ✅ **Canvas Controls** - Fit view, export as PNG, auto-layout functionality
+- ✅ **Dark Mode** - Full dark mode support with theme toggle
+- ✅ **Accessibility** - WCAG 2.2 AA compliant with keyboard navigation
 
 ## 🎯 Key Features (MVP Roadmap)
 
