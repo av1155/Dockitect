@@ -1568,7 +1568,21 @@ feat(canvas): render Service and Network nodes from Blueprint
 
 ---
 
-### P1.5: Connect Services to Networks (Edges) ⬜
+### P1.5: Connect Services to Networks (Edges) ✅
+
+**Status:** COMPLETE (2025-10-06)
+
+**Deliverables Summary (P1.5 - Edges & Interactions):**
+- ✅ Hierarchical auto-layout algorithm
+- ✅ Edge styling with success color and arrows
+- ✅ NodeDetailsPanel with tabs
+- ✅ CanvasControls component
+- ✅ Click handlers on nodes
+- ✅ Export PNG functionality
+- ✅ Auto-fit view after upload
+- ✅ Keyboard accessibility
+- ✅ 4 new E2E tests
+- ✅ All tests passing: 58 unit + 15 E2E = 73 total
 
 **Files:**
 

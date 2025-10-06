@@ -21,6 +21,17 @@ Homelabs grow messy: scattered `docker-compose.yml` files, port collisions, no s
 
 ---
 
+## Features
+
+- ✅ **Import Docker Compose files** - Upload and visualize your existing compose files
+- ✅ **Visual Canvas** - Interactive node-based visualization with React Flow
+- ✅ **Network Topology** - See connections between services and networks with styled edges
+- ✅ **Interactive Nodes** - Click nodes to view full service/network details
+- ✅ **Details Panel** - Comprehensive view of environment variables, volumes, ports, and networks
+- ✅ **Canvas Controls** - Fit view, export as PNG, auto-layout functionality
+- ✅ **Dark Mode** - Full dark mode support with theme toggle
+- ✅ **Accessibility** - WCAG 2.2 AA compliant with keyboard navigation
+
 ## 🎯 Key Features (MVP Roadmap)
 
 - [x] Repository setup with CI/CD pipeline
