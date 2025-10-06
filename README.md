@@ -5,7 +5,16 @@
 
 Draw your topology on a canvas, then export **deterministic `docker-compose.yml`** you can run anywhere. Import existing Compose to visualize and fix conflicts. Self-hosted, beautiful, and fast.
 
-_Coming soon: Animated demo_
+## Screenshots
+
+![Network topology](assets/marketing/network.png)
+
+![Service details panel](assets/marketing/side-panel.png)
+
+![Network details panel](assets/marketing/side-panel-network.png)
+
+![Mobile layout + dark mode](assets/marketing/mobile-layout+dark-mode.png)
+
 
 ---
 
