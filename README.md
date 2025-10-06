@@ -7,13 +7,16 @@ Draw your topology on a canvas, then export **deterministic `docker-compose.yml`
 
 ## Screenshots
 
-![Network topology](assets/marketing/network.png)
-
-![Service details panel](assets/marketing/side-panel.png)
-
-![Network details panel](assets/marketing/side-panel-network.png)
-
-![Mobile layout + dark mode](assets/marketing/mobile-layout+dark-mode.png)
+<table>
+  <tr>
+    <td><img src="assets/marketing/network.png" alt="Network topology" width="420" /></td>
+    <td><img src="assets/marketing/side-panel.png" alt="Service details panel" width="420" /></td>
+  </tr>
+  <tr>
+    <td><img src="assets/marketing/side-panel-network.png" alt="Network details panel" width="420" /></td>
+    <td><img src="assets/marketing/mobile-layout+dark-mode.png" alt="Mobile layout and dark mode" width="420" /></td>
+  </tr>
+</table>
 
 
 ---
