@@ -14,6 +14,8 @@
 
 Design homelab topologies on a canvas and export deterministic `docker-compose.yml`. Import existing Compose to visualize and fix conflicts. Self-hosted, fast, and beautiful. Compose v2.x is in scope for import/export.
 
+Designer-First Workflow: create in three ways — Wizard, Blank Canvas, or Start with YAML; edit in dual modes (Canvas <-> YAML), with full round-trip once the deterministic exporter lands. A personal Library lets you save and reuse blueprints/templates (local-storage prototype now; planned SQLite/Prisma migration in P5). Dockitect is intentionally designer-first: no runtime management; export and then deploy via CLI, Portainer, or any orchestrator.
+
 ---
 
 ## 3) Development approach (solo w/ agentic AI)
@@ -77,6 +79,8 @@ This is a hybrid of agile + Shape Up, tuned for a solo dev and AI pair-programme
 **Privacy & offline:** default **no telemetry**. Offer an opt-in anonymous metrics flag later with a public schema.
 
 **Security:** app does **not** need Docker socket. It’s a **designer** that reads/writes files. Keep it unprivileged. A future “introspect running host” add-on can use a sidecar with least privilege.
+
+- Reinforcement: Dockitect never connects to the Docker socket and is not a runtime management tool. Users should export YAML and deploy with their preferred tooling (CLI, Portainer, etc.).
 
 **Determinism:** exporting YAML must be **stable** (key orders, env order, volume order). It’s crucial for clean diffs → star-win.
 
@@ -150,6 +154,8 @@ DELIVERABLES:
 - Tests for importer/exporter round-trip basics.
 
 Follow best practices, explain decisions inline as comments, and prefer simplicity over perfection.
+
+Reminder: When implementing Designer-First features, coordinate with docs to update README, roadmap, and architecture pages to keep product and tech narratives aligned.
 ```
 
 ---

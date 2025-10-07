@@ -31,6 +31,7 @@ dockitect/
 - **Canvas**: React Flow (`@xyflow/react`) for visual topology editor
 - **State**: Zustand for global canvas state management
 - **Forms**: React Hook Form + Zod validation
+- **Editor**: Monaco Editor (`monaco-editor`) + `monaco-yaml` with Docker Compose JSON Schema for YAML editing/validation
 
 ### Backend/Core
 
@@ -49,6 +50,12 @@ dockitect/
 - **Release**: semantic-release with Conventional Commits
 
 ## Core Principles
+
+### Designer-First UX
+
+- Creation paths: Wizard, Blank Canvas, and Start with YAML
+- Dual-mode editing: Canvas ↔ YAML with Blueprint v0 as the single source of truth
+- Library: Offline-first; local storage prototype today with planned migration to SQLite/Prisma in P5 for durability and queries
 
 ### 1. Privacy First
 
@@ -168,14 +175,32 @@ See [ADR 0001](../adr/0001-blueprint-schema.md) for design rationale.
 
 ```mermaid
 graph LR
-    A[docker-compose.yml] -->|Import| B[Importer Package]
+    %% Sources
+    A[docker-compose.yml]
+    W[Wizard]
+    Y[YAML Editor (Monaco + monaco-yaml)]
+    L[Library]
+
+    %% Import
+    A -->|Import| B[Importer Package]
+
+    %% Core Model
     B -->|Zod Validation| C[Blueprint v0 JSON]
+    Y -->|Parse + Validate| C
+    W -->|Generate| C
+    L -->|Load| C
+
+    %% UI
     C -->|Render| D[React Flow Canvas]
     D -->|User Edits| E[Modified Blueprint]
+    Y <-->|Two-way sync| C
+
+    %% Persistence & Export
     E -->|Save| F[SQLite via Prisma]
     E -->|Export| G[Exporter Package]
     G -->|Stable YAML| H[docker-compose.yml]
     H -.Round-trip test.-> A
+    F -->|Project list| L
 ```
 
 ### Importer Data Flow (P1.2 - Implemented)
@@ -378,6 +403,11 @@ See [ADR 0001](../adr/0001-blueprint-schema.md) for full rationale.
 - **Portability**: Works on NAS, Pi, low-power devices
 - **Backup simplicity**: Copy one file to backup all blueprints
 - **Zero config**: No connection strings, no network ports
+
+#### Library Persistence
+
+- Current: Offline prototype stores Library entries in browser localStorage for instant, zero-setup persistence.
+- Planned (P5): Migrate Library to SQLite via Prisma for durability, indexing, and richer queries while preserving offline-first behavior.
 
 ### Why Monorepo?
 

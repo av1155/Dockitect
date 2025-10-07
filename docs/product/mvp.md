@@ -1,5 +1,11 @@
 # MVP Scope
 
+## Designer-First Experience
+
+- Three creation paths: Wizard, Blank Canvas, Start with YAML
+- Dual-mode editing (Canvas ↔ YAML) planned; real-time sync relies on the deterministic exporter (P2) to ensure stable, reproducible diffs.
+- Offline-first personal Library for user-saved templates/stacks; starts local-only and expands post-MVP.
+
 ## Core Features
 
 ### 1. Blueprint Editor
@@ -51,6 +57,8 @@
 - Template metadata: name, description, icon, default ports, required env vars
 - Drag-and-drop templates onto canvas (pre-configured services)
 - Template gallery sidebar with search/filter
+- Appliance templates remain curated, bundled content; they are distinct from the personal Library.
+- Library (prototype): user-saved templates/stacks stored locally (offline). Starts with browser local storage; planned migration to SQLite/Prisma in P5.
 
 ### 5. Persistence & Project Management
 
@@ -77,8 +85,10 @@
 3. **Templates** for 5 appliances render correctly on canvas
 4. **Persistence** auto-saves after 2s; reload restores blueprint
 5. **Deterministic export**: Multiple exports produce identical diffs
-6. **Tests**: ≥80% code coverage (unit + e2e)
-7. **Documentation**: README with animated GIF, quickstart guide
+6. **Canvas ↔ YAML**: Round-trip sync within 500ms once P3a lands
+7. **Library**: Save to and open from the personal Library prototype
+8. **Tests**: ≥80% code coverage (unit + e2e)
+9. **Documentation**: README with animated GIF, quickstart guide
 
 ## First-Week KPIs (from Dockitect.md vision)
 
@@ -98,6 +108,10 @@
 - ✅ 3+ templates available
 - ✅ Import → canvas → export loop working end-to-end
 - ✅ PR previews on every change (CI/CD pipeline)
+
+## Further Reading
+
+- Designer-First Workflow: [docs/product/designer-first-workflow.md](./designer-first-workflow.md)
 
 ## Privacy & Security Guardrails
 

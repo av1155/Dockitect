@@ -1625,7 +1625,13 @@ feat(canvas): render edges connecting services to networks
 
 ---
 
-### P1.6: Add Importer Test Fixtures ⬜
+### P1.6: Add Importer Test Fixtures ✅
+
+**Status:** COMPLETE (2025-10-07)
+
+**Deliverables Summary (P1.6 - Importer Fixtures):**
+- ✅ Added fixtures: simple.yml, multi-service.yml, networks.yml, volumes.yml, ports.yml, jellyfin.yml
+- ✅ Parser tests passing (23/23) with fixtures; coverage ≥ 80%
 
 **Files:**
 
@@ -2036,6 +2042,200 @@ docs: add demo GIF for export flow (draw → export)
 
 ---
 
+## P2a: Designer Entry Points & Library Foundations
+
+> Context: See `/docs/product/designer-first-workflow.md` for goals, flows, and UX notes.
+>
+> Note: Persistence uses `localStorage` initially and migrates to SQLite/Prisma during P5 (see P5.1–P5.6).
+
+### P2a.1: Create Menu & Blank Canvas Entry Point ⬜
+
+**Files:**
+
+- `/apps/web/components/TopBar.tsx` (new; Menu: New, Open, Save, Export)
+- `/apps/web/components/CommandMenu.tsx` (new; optional command palette)
+- `/apps/web/app/page.tsx` (wire TopBar + canvas entry)
+- `/apps/web/components/CanvasControls.tsx` (augment with entry actions)
+
+**Commands:**
+
+```bash
+cd apps/web
+# No new deps required (use existing UI stack)
+```
+
+**Tests:**
+
+- E2E: home page renders TopBar and a "New" action creates a blank blueprint on canvas
+- E2E: keyboard shortcut opens command menu (if present)
+
+**Docs:**
+
+- Update `/docs/product/designer-first-workflow.md` with entry points
+- Update `/README.md` quickstart screenshots (menu visible)
+- Update `/docs/tech/architecture.md` (UI composition: TopBar, Canvas)
+- Update `/docs/product/mvp.md` (note blank-canvas flow)
+
+**Commit:**
+
+```
+feat(ui): add top menu and blank-canvas entry point
+```
+
+**PR:**
+
+- Title: `feat(ui): add top menu and blank-canvas entry point`
+- Description:
+    - TopBar with New/Open/Save/Export actions
+    - Blank canvas creation from New
+    - Optional command palette for discoverability
+    - E2E validates entry point rendering
+- Labels: `type: feature`, `phase: p2a`, `priority: high`, `area: ui`
+- Reviewers: @maintainer
+- CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
+
+---
+
+### P2a.2: New Project Wizard UI ⬜
+
+**Files:**
+
+- `/apps/web/components/NewProjectWizard.tsx` (multi-step)
+- `/apps/web/components/TopBar.tsx` (hook up "New" → wizard)
+- `/apps/web/lib/wizard.ts` (state helpers)
+
+**Commands:**
+
+```bash
+cd apps/web
+# No new deps (use shadcn/ui components)
+```
+
+**Tests:**
+
+- E2E: open wizard → choose Blank vs Template → set name → Create → canvas reflects choices
+- Unit: wizard state transitions (next/back/validate)
+
+**Docs:**
+
+- Update `/docs/product/designer-first-workflow.md` (wizard steps, acceptance criteria)
+- Update `/README.md` (GIF or steps summary)
+- Update `/docs/product/mvp.md` (onboarding path)
+
+**Commit:**
+
+```
+feat(ui): add multi-step New Project wizard
+```
+
+**PR:**
+
+- Title: `feat(ui): add multi-step New Project wizard`
+- Description:
+    - Wizard for Blank or Template start, project naming
+    - Writes initial Blueprint to state and renders canvas
+    - Tests cover transitions and canvas result
+- Labels: `type: feature`, `phase: p2a`, `priority: medium`, `area: ui`
+- Reviewers: @maintainer
+- CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
+
+---
+
+### P2a.3: Library UI with Local Storage Prototype ⬜
+
+**Depends on:** P1 importer (Open from YAML), P2 exporter (Export to YAML) for round-trips.
+
+**Files:**
+
+- `/apps/web/lib/localLibrary.ts` (localStorage wrapper; versioned)
+- `/apps/web/components/LibraryPanel.tsx` (list/search/sort projects)
+- `/apps/web/components/TopBar.tsx` (Open → LibraryPanel)
+
+**Commands:**
+
+```bash
+cd apps/web
+# No new deps; use window.localStorage (guarded for SSR)
+```
+
+**Tests:**
+
+- Unit: `localLibrary` read/write/migrate stubs, version tagging
+- E2E: create project → Save → reload page → project appears in Library and opens
+
+**Docs:**
+
+- Update `/docs/product/designer-first-workflow.md` (Library UX, constraints)
+- Update `/docs/tech/architecture.md` (temporary localStorage, future DB in P5)
+- Update `/docs/product/mvp.md` (persistence note)
+
+**Commit:**
+
+```
+feat(ui): add Library panel with localStorage-backed prototype
+```
+
+**PR:**
+
+- Title: `feat(ui): add Library panel with localStorage-backed prototype`
+- Description:
+    - Library browser for saved blueprints (localStorage)
+    - SSR-safe storage access; versioned entries for future migration
+    - E2E verifies persistence across reloads
+- Labels: `type: feature`, `phase: p2a`, `priority: high`, `area: ui`
+- Reviewers: @maintainer
+- CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
+
+---
+
+### P2a.4: Save/Open Flows (Local Only, Migrate in P5) ⬜
+
+**Depends on:** P1 importer (YAML → Blueprint), P2 exporter (Blueprint → YAML).
+
+**Files:**
+
+- `/apps/web/components/SaveButton.tsx` (Save to Library)
+- `/apps/web/components/OpenButton.tsx` (Open from Library)
+- `/apps/web/components/DownloadButton.tsx` (optional: download `.dockitect.json`)
+- `/apps/web/components/UploadBlueprint.tsx` (optional: upload `.dockitect.json`)
+
+**Commands:**
+
+```bash
+cd apps/web
+pnpm add @dockitect/exporter @dockitect/importer # wire conversions in UI
+```
+
+**Tests:**
+
+- E2E: Save → reload → Open → canvas restores same nodes/edges
+- E2E: Export YAML → re-import YAML → canvas identical (round-trip)
+
+**Docs:**
+
+- Update `/README.md` (save/open basics)
+- Update `/docs/product/mvp.md` (temporary local persistence)
+- Update `/docs/tech/architecture.md` (note migration to Prisma/SQLite in P5)
+
+**Commit:**
+
+```
+feat(ui): implement local save/open flows and YAML round-trips
+```
+
+**PR:**
+
+- Title: `feat(ui): implement local save/open flows and YAML round-trips`
+- Description:
+    - Save/Open via localStorage Library
+    - Export/Import via @dockitect/{exporter,importer}
+    - Round-trip E2E validates parity
+- Labels: `type: feature`, `phase: p2a`, `priority: high`, `area: ui`
+- Reviewers: @maintainer
+- CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
+
+---
+
 ## P3: Conflict Lint & Validation
 
 ### P3.1: Implement Validation Engine (Zod Refinements) ⬜
@@ -2294,6 +2494,191 @@ docs: add demo GIF for conflict detection and auto-fix
 - Labels: `type: docs`, `phase: p3`, `priority: low`
 - Reviewers: @maintainer
 - CI Checks: `build`
+
+---
+
+### P3a: Dual-Mode Canvas ↔ YAML Editor ⬜
+
+> Context: See `/docs/product/designer-first-workflow.md` for the Designer-First flow, editing modes, and UX guidelines.
+>
+> Depends on: P1 importer (YAML → Blueprint), P2 exporter (Blueprint → YAML), and P3 validation for problems panel.
+
+### P3a.1: Monaco Integration & YAML Mode Toggle ⬜
+
+**Files:**
+
+- `/apps/web/components/EditorToggle.tsx` (Canvas ↔ YAML switch)
+- `/apps/web/components/YamlEditor.tsx` (Monaco-based YAML editor)
+- `/apps/web/app/globals.css` (editor styles, theme integration)
+
+**Commands:**
+
+```bash
+cd apps/web
+pnpm add monaco-editor @monaco-editor/react yaml
+```
+
+**Tests:**
+
+- E2E: toggle from Canvas → YAML and back; state preserved
+- Unit: YAML parse/serialize helpers round-trip a small Blueprint
+
+**Docs:**
+
+- Update `/README.md` (dual-mode editor blurb)
+- Update `/docs/product/mvp.md` (editing modes)
+- Update `/docs/tech/architecture.md` (mode architecture)
+
+**Commit:**
+
+```
+feat(editor): add Monaco YAML editor and mode toggle
+```
+
+**PR:**
+
+- Title: `feat(editor): add Monaco YAML editor and mode toggle`
+- Description:
+    - Monaco editor embedded alongside Canvas
+    - Toggle control switches modes without losing state
+    - Unit + E2E validate basic sync
+- Labels: `type: feature`, `phase: p3a`, `priority: high`, `area: ui`
+- Reviewers: @maintainer
+- CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
+
+---
+
+### P3a.2: Live Sync (Blueprint ↔ YAML) + Problems Panel ⬜
+
+**Files:**
+
+- `/apps/web/lib/sync.ts` (diff-aware sync; debounce; error boundaries)
+- `/apps/web/components/ProblemsPanel.tsx` (lint + parse errors)
+- `/apps/web/lib/useValidation.ts` (extend to surface parse/lint issues)
+
+**Commands:**
+
+```bash
+cd apps/web
+# No new deps beyond P3 + monaco packages
+```
+
+**Tests:**
+
+- Unit: invalid YAML shows parse error with line/column
+- Unit: conflicting YAML shows lint errors via schema refinements
+- E2E: edit YAML → Canvas updates; edit Canvas → YAML updates
+
+**Docs:**
+
+- Update `/docs/reference/lint-rules.md` (surface in Problems panel)
+- Update `/docs/product/designer-first-workflow.md` (live sync behavior)
+- Update `/docs/tech/architecture.md` (sync design)
+
+**Commit:**
+
+```
+feat(editor): live sync between YAML and canvas with problems panel
+```
+
+**PR:**
+
+- Title: `feat(editor): live sync between YAML and canvas with problems panel`
+- Description:
+    - Debounced two-way sync with error handling
+    - Problems panel merges parser + validator diagnostics
+    - Tests verify sync and diagnostics
+- Labels: `type: feature`, `phase: p3a`, `priority: high`, `area: ui`
+- Reviewers: @maintainer
+- CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
+
+---
+
+### P3a.3: Diff Modal (Preview YAML Changes) ⬜
+
+**Files:**
+
+- `/apps/web/components/DiffModal.tsx` (side-by-side or inline diff)
+- `/apps/web/lib/diff.ts` (use `diff` or `diff3` JS lib)
+- `/apps/web/components/TopBar.tsx` (hook Diff before Save/Export)
+
+**Commands:**
+
+```bash
+cd apps/web
+pnpm add diff
+```
+
+**Tests:**
+
+- Unit: diff utility correctly renders changed keys/values
+- E2E: make Canvas edits → open Diff → shows expected changes
+
+**Docs:**
+
+- Update `/README.md` (diff preview mention)
+- Update `/docs/product/designer-first-workflow.md` (review-before-save/export)
+
+**Commit:**
+
+```
+feat(editor): add diff modal to review YAML changes
+```
+
+**PR:**
+
+- Title: `feat(editor): add diff modal to review YAML changes`
+- Description:
+    - Diff view between last saved YAML and current state
+    - Hook into Save and Export flows
+    - Tests validate diff correctness
+- Labels: `type: feature`, `phase: p3a`, `priority: medium`, `area: ui`
+- Reviewers: @maintainer
+- CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
+
+---
+
+### P3a.4: Sync Robustness & Edge Cases ⬜
+
+**Files:**
+
+- `/apps/web/lib/sync.ts` (enhance: comments preservation strategy; anchors warning)
+- `/apps/web/components/YamlEditor.tsx` (error decorations; jump-to-line; go-to-problem)
+
+**Commands:**
+
+```bash
+cd apps/web
+# No new deps
+```
+
+**Tests:**
+
+- Unit: arrays ordering preserved; determinism upheld (ties back to P2 exporter)
+- Unit: anchors/aliases produce warnings (unsupported in MVP)
+- E2E: large YAML (20 services) editing performance acceptable (<2s update)
+
+**Docs:**
+
+- Update `/docs/product/mvp.md` (limitations: anchors, comments)
+- Update `/docs/tech/architecture.md` (diff/sync constraints)
+
+**Commit:**
+
+```
+feat(editor): improve sync robustness, decorations, and edge-case handling
+```
+
+**PR:**
+
+- Title: `feat(editor): improve sync robustness, decorations, and edge-case handling`
+- Description:
+    - Preserve array ordering; warn on anchors/aliases
+    - Editor decorations for errors and go-to-problem
+    - Performance checks on large files
+- Labels: `type: feature`, `phase: p3a`, `priority: medium`, `area: ui`
+- Reviewers: @maintainer
+- CI Checks: `typecheck`, `lint`, `test`, `e2e`, `build`
 
 ---
 

@@ -187,7 +187,83 @@ This roadmap takes Dockitect from zero to GA (General Availability) through seve
 **Dependencies:**
 
 - Tech: `yaml` package with custom ordering, `fast-json-stable-stringify`
-- Sequencing: Requires P1 (Blueprint schema & importer)
+- Sequencing: Requires P1 (Blueprint schema & importer); Enables P2a; Prerequisite for P3a (deterministic sync)
+
+**Estimated Effort:** **L** (5-7 days)
+
+---
+
+## P2a: Designer Entry Points & Library Foundations
+
+**Goal:** Reduce friction to start designing and seed an offline library. Begin with a localStorage prototype, then migrate persistence to SQLite/Prisma in P5.
+
+**Scope:**
+
+- "Create" dropdown with: Blank Canvas, Start with Wizard, Start with YAML (basic)
+- Library UI with Services and Stacks tabs; save/open, search, tag; duplicate/delete
+- "Save to Library" action storing to localStorage (no DB yet)
+
+**Deliverables:**
+
+- Three creation paths functional (Wizard, Canvas, YAML)
+- Library can save/load/search/tag and instantiate templates offline (localStorage)
+- "Save to Library" available from the toolbar
+- See: [Designer-First Workflow](./designer-first-workflow.md), [MVP](./mvp.md)
+
+**Acceptance Criteria:**
+
+- [ ] Wizard produces Blueprint v0 that passes schema validation
+- [ ] Blank Canvas allows add service/network and exports via P2
+- [ ] "Start with YAML" opens editor (full dual-mode lands in P3a)
+- [ ] Save → Open round-trip works offline; no network requests
+- [ ] E2E: Wizard → Canvas → Save to Library → Open → Export
+
+**Risks & Rollback:**
+
+- Risk: localStorage limits/inconsistency → Mitigation: small payloads; migrate in P5
+- Rollback: Hide Library UI; keep Create paths
+
+**Dependencies:**
+
+- Tech: React Flow, shadcn/ui, browser localStorage
+- Sequencing: Follows P2 (export) to enable end-to-end flow; prepares P3a; persistence migrates in P5
+
+**Estimated Effort:** **M** (4-6 days)
+
+---
+
+## P3a: Dual-Mode Canvas ↔ YAML Editor
+
+**Goal:** Add a Monaco-based YAML editor with Compose schema and bidirectional sync with Canvas. Sync relies on P2 exporter for deterministic regeneration.
+
+**Scope:**
+
+- Monaco YAML editor (`@monaco-editor/react` + `monaco-yaml`) with schema validation
+- Mode toggle (Canvas | YAML) + keyboard shortcut; Problems panel; format-on-save
+- Debounced, conflict-aware sync between YAML ↔ Blueprint ↔ Canvas
+
+**Deliverables:**
+
+- Edits in either mode reflect in the other within 500ms
+- Problems panel shows diagnostics; structural changes prompt confirmation
+- Export remains deterministic via `@dockitect/exporter`
+- See: [Designer-First Workflow](./designer-first-workflow.md), [MVP](./mvp.md)
+
+**Acceptance Criteria:**
+
+- [ ] Valid YAML updates Canvas; invalid YAML shows errors without updating Canvas
+- [ ] Toggle works in toolbar + keyboard shortcut
+- [ ] E2E: Import → Edit YAML → Toggle Canvas → Export deterministic YAML
+
+**Risks & Rollback:**
+
+- Risk: Sync complexity/performance → Mitigation: debounce, lazy-load Monaco
+- Rollback: Keep read-only "Preview YAML" until stable
+
+**Dependencies:**
+
+- Tech: `@monaco-editor/react`, `monaco-yaml`
+- Sequencing: Requires P2 (exporter) for deterministic sync; complements P3 (validation); typically follows P2a
 
 **Estimated Effort:** **L** (5-7 days)
 

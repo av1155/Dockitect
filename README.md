@@ -5,6 +5,10 @@
 
 Draw your topology on a canvas, then export **deterministic `docker-compose.yml`** you can run anywhere. Import existing Compose to visualize and fix conflicts. Self-hosted, beautiful, and fast.
 
+- Creation paths: Wizard, Blank Canvas, or Start with YAML
+- Dual‑mode Canvas ↔ YAML editor (upcoming) — follows the deterministic exporter
+- Personal Library (planned prototype; future SQLite‑backed migration)
+
 ## Screenshots
 
 <table>
@@ -26,6 +30,8 @@ Draw your topology on a canvas, then export **deterministic `docker-compose.yml`
 ## ✨ Why Dockitect?
 
 Homelabs grow messy: scattered `docker-compose.yml` files, port collisions, no single source of truth. **Dockitect** bridges **design ↔ code**:
+
+> Designer‑first, not a deployment tool. Dockitect does not talk to the Docker socket. Export YAML and deploy with your preferred tools.
 
 - **Visual canvas** for hosts, networks, and services (React Flow)
 - **Import Compose** → see your lab as a graph
@@ -54,13 +60,13 @@ Homelabs grow messy: scattered `docker-compose.yml` files, port collisions, no s
 - [x] React Flow canvas with Zustand state management
 - [x] Blueprint v0 schema with Zod validation (34 tests)
 - [x] Compose v2.x parser → Blueprint (23 tests, 6 fixtures)
-- [ ] Canvas editor with Host / Network / Service nodes
+- [x] Canvas editor with Host / Network / Service nodes
 - [x] File upload UI for Compose import (4 E2E tests)
 - [ ] Export Blueprint → stable docker-compose.yml
 - [ ] Port/volume/name conflict detection
 - [ ] 5+ appliance templates (drag-and-drop)
 - [ ] SQLite persistence for blueprints
-- [ ] Light/dark theme
+- [x] Light/dark theme
 
 _See [roadmap.md](docs/product/roadmap.md) for full plan._
 
@@ -149,7 +155,7 @@ We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 ## 🗺️ Roadmap
 
-Current phase: **P1 - MVP Importer (Compose v2.x → Blueprint)** 🚧 (80% complete)
+Current phase: Now entering **P2 – MVP Exporter (Blueprint → Compose v2.x)** 🚧 (P1 complete). Next: **P2a** (Designer entry points & Library foundations) → **P3a** (Dual‑mode Canvas ↔ YAML editor). See roadmap for sequencing.
 
 Completed:
 
@@ -161,12 +167,10 @@ Completed:
 
 Next up:
 
-- **P1.5**: Network Edges & Node Interactivity
-- **P1.6**: Import Validation & Error Handling
 - **P2**: MVP Exporter (Blueprint → Compose v2.x)
 - **P3**: Conflict Detection & Validation
 
-See [docs/product/roadmap.md](docs/product/roadmap.md) for details.
+See [docs/product/roadmap.md](docs/product/roadmap.md) for details and timeline.
 
 ---
 

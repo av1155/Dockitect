@@ -141,6 +141,8 @@ Schema migrations will be versioned and tested with round-trip import/export fix
 3. **Test fixtures**: Include 5+ Blueprint examples in `/packages/schema/__fixtures__/`
 4. **Round-trip tests**: Compose → Blueprint → Compose (semantic equivalence)
 
+Designer-first workflow: The new Library feature stores serialized Blueprint snapshots (both service templates and full stacks), keeping the schema the single source of truth. User-saved templates and stacks simply serialize the existing Blueprint and introduce no new entities or structural changes. Unsupported Compose fields surfaced via the YAML editor will be preserved as labels/annotations where possible or emitted as warnings, aligned with the Designer-First proposal.
+
 ## Implementation Status
 
 ✅ **Completed** (P1.1 - 2025-01-04)
